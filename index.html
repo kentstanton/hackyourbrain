@@ -8,23 +8,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./bootstrap-3.3.7-dist/favicon.ico">
 
     <title>Hack Your Brain</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="./bootstrap-3.3.7-dist/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
+   
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="./bootstrap-3.3.7-dist/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="./bootstrap-3.3.7-dist/assets/js/ie-emulation-modes-warning.js"></script>
-
+   
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -78,10 +72,14 @@
             <li><a href="">Advanced Ratios</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
-
-          <div class="row placeholders">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+          <h1 class="page-header">Dashboard</h1><span class="linkbutton" style="font-weight:bold;" id="link-by-month">By Month</span><span class="linkbutton" id="link-by-topic">By Topic</span>
+          <div class="row placeholders" id="dashboard-monthly">
+              <img src="./demographic.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+              
+          </div>            
+          
+          <div class="row placeholders" id="dashboard-topics" style="display:none;">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4>Scientific Noation</h4>
@@ -94,17 +92,18 @@
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>For the Month </h4>
-              <span class="text-muted">75% Complete</span>
+              <h4>Advanced Ratios </h4>
+              <span class="text-muted">0% Complete</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>For the Year</h4>
-              <span class="text-muted">50% Complete</span>
+              <h4>Ratio Challenges</h4>
+              <span class="text-muted">0% Complete</span>
             </div>
-          </div>
-
-          <h2 class="sub-header">To Do:</h2>
+          </div>    
+          
+          
+          <h2 class="sub-header">Recent:</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -145,12 +144,23 @@
                   <td style="color:green">` 33/100=x/12 `</td>
                   <td style="color:green">` 17=x/100 `</td>
                 </tr>
+                <tr>
+                    <div id='container'></div>
+                </tr>
+                
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- react core javascript -->
+    <script src="./react/build/react.js"></script>
+    <script src="./react/build/react-dom.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -159,8 +169,53 @@
     <script>window.jQuery || document.write('<script src="./bootstrap-3.3.7-dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="./bootstrap-3.3.7-dist/assets/js/vendor/holder.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./bootstrap-3.3.7-dist/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+    
+    
+    <!-- mathhacks core javascript -->
+    <script type="text/babel">
+      var ExampleApplication = React.createClass({
+        render: function() {
+          var elapsed = Math.round(this.props.elapsed  / 100);
+          var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
+          var message =
+            'React has been successfully running for ' + seconds + ' seconds.';
+
+          return <p>{message}</p>;
+        }
+      });
+      var start = new Date().getTime();
+      setInterval(function() {
+        ReactDOM.render(
+          <ExampleApplication elapsed={new Date().getTime() - start} />,
+          document.getElementById('container')
+        );
+      }, 50);
+    </script>
+    
+    <script>
+        $(document).ready(function(){
+
+            $("#link-by-topic").click( function() {
+                $("#dashboard-monthly").hide();
+                $("#dashboard-topics").show();
+                $("#link-by-topic").css("font-weight", "Bold");
+                $("#link-by-month").css("font-weight", "Normal");
+
+            });
+
+            $("#link-by-month").click( function() {
+                $("#dashboard-monthly").show();
+                $("#dashboard-topics").hide();
+                $("#link-by-month").css("font-weight", "Bold");
+                $("#link-by-topic").css("font-weight", "Normal");
+               
+            });
+
+        });       
+    </script>
+    
   </body>
 </html>

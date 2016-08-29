@@ -103,3 +103,15 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.linkbutton {
+    color: #428bca;
+    padding-right: 20px;
+    cursor: hand;
+}
+
+.linkbutton > .active > a,
+.linkbutton > .active > a:hover,
+.linkbutton > .active > a:focus {
+    font-weight: bold;
+}
