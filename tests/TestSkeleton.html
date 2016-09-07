@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit basic example</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+  <script type="text/javascript"  src="./Skelton.js"></script>
+
+  <script>
+    QUnit.test( "a basic test example", function( assert ) {
+      var value = "hello";
+      assert.equal( value, "hello", "We expect value to be hello" );
+    });
+    
+    QUnit.test( "GetNextProblemGetProblemSet(1)", function( assert ) {
+      var randomProblemSet = GetNextProblemGetProblemSet(1);
+      assert.ok( randomProblemSet !==null, "Problem set 1 not equal to null" );
+    });
+
+    QUnit.test( "GetNextProblemGetProblemSets not equal", function( assert ) {
+      var randomProblemSet = GetNextProblemGetProblemSet(1);
+      var otherRandomProblemSet = GetNextProblemGetProblemSet(2);
+      assert.ok( randomProblemSet.question !== otherRandomProblemSet.question, "Problem Set 1 not equal to Problem set 2" );
+    });
+    
+  </script>
+</body>
+</html>

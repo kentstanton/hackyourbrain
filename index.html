@@ -16,7 +16,7 @@
 
    
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+    <link href="./dashboard.css" rel="stylesheet">
 
    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,7 +25,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_CHTML"></script>
+
   </head>
 
   <body>
@@ -43,15 +43,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
+            
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
         </div>
+        
       </div>
     </nav>
 
@@ -59,20 +60,76 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active" style="font-weight:bold"><a href="#">My Progress<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Current</a></li>
-            <li><a href="#">Challenges</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">History</a></li>
+            <li id="menu-item-dashboard" class="active" style="font-weight:bold"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
+            <li id="menu-item-currentproblems"><a href="#">Current</a></li>
+            <li id="menu-item-allproblemsets"><a href="#">All Problem Sets</a></li>
+            <li id="menu-item-challenges"><a href="#">Challenges</a></li>
+            <li id="menu-item-reports"><a href="#">Reports</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li style="font-weight:bold"><a href="">January Challenges</a></li>
             <li><a href="">Basic Ratios</a></li>
             <li><a href="">Scientific Noation</a></li>
             <li><a href="">Advanced Ratios</a></li>
+            <li id="timer" style="padding-left:20px;"></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+
+
+        <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
+          <h1 class="page-header">Exercise 17: Scientific Notation, Level 3</h1>
+          <h3 class="page-header">You must answer all five questions correctly to move the next level.</h3>
+          
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Evaluate:</th>
+                  <th>Answer 1</th>
+                  <th>Answer 2</th>
+                  <th>Answer 3</th>
+                  <th>Answer 4</th>
+                </tr>
+              </thead>
+              <tbody id="problem-set-table">
+                <tr id="question-row-1">
+                  <td >` 6.72 xx 10^3 `</td>
+                  <td style="color:#428bca;cursor:hand;" id="q1-a1">` 6720 `</a></td>
+                  <td style="color:#428bca" id="q1-a2">` 672 `</a></td>
+                  <td style="color:#428bca" id="q1-a3">` .672 `</a></td>
+                  <td style="color:#428bca" id="q1-a4">` 672000 `</a></td>
+                </tr>
+                <tr>
+                  <td>` 1.05 xx 10^2 `</td>
+                  <td style="color:green">` 1.05 xx 10^2 `</td>
+                  <td style="color:green">` 1 xx 10^10 `</td>
+                  <td style="color:green">` 1.05 xx 10^7 `</td>
+                  <td style="color:green">` 1.05 xx 10^1 `</td>
+                </tr>
+                <tr>
+                  <td>` 3 xx 10^2 `</td>
+                  <td style="color:green">` 3 xx 10^2 `</td>
+                  <td style="color:green">` 3 xx 10^10 `</td>
+                  <td style="color:green">` 3 xx 10^7 `</td>
+                  <td style="color:green">` 3 xx 10^1 `</td>
+                </tr>
+
+                <tr>
+                  <td>` 17/12 xx 10^1 `</td>
+                  <td style="color:green">` 17/12=x/100 `</td>
+                  <td style="color:green">` 1/12=x/60 `</td>
+                  <td style="color:green">` 33/100=x/12 `</td>
+                  <td style="color:green">` 17=x/100 `</td>
+                </tr>
+                
+                <tr id="container"></tr>                
+              </tbody>
+            </table>
+          </div>
+        </div>    
+
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
           <h1 class="page-header">Dashboard</h1><span class="linkbutton" style="font-weight:bold;" id="link-by-month">By Month</span><span class="linkbutton" id="link-by-topic">By Topic</span>
           <div class="row placeholders" id="dashboard-monthly">
               <img src="./demographic.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
@@ -102,50 +159,49 @@
             </div>
           </div>    
           
+            
           
-          <h2 class="sub-header">Recent:</h2>
+          <h2 class="sub-header">Recent Problem Sets:</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>Recent Problem Sets</th>
-                  <th>Question 1</th>
-                  <th>Question 2</th>
-                  <th>Question 3</th>
-                  <th>Question 4</th>
+                  <th>Level</th>
+                  <th>Set</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Scientific Notation: Level 2, Set 3 of 4</td>
-                  <td style="color:green">` 6.72 xx 10^3 `</td>
-                  <td style="color:red">` 6.72 xx 10^0 `</td>
-                  <td style="color:green">` 6.72 xx 10^2 `</td>
-                  <td style="color:green">` 6.72 xx 10^1 `</td>
+                  <td>Scientific Notation</td>
+                  <td style="color:green">1</td>
+                  <td style="color:green">4 of 4</td>
+                  <td style="color:Red; font-weight:bold;">To Do</td>
+                  <td style="color:#428bca; font-weight:bold;">Start</td>
+                </tr>
+                  
+                <tr>
+                  <td>Scientific Notation</td>
+                  <td style="color:green">1</td>
+                  <td style="color:green">3 of 4</td>
+                  <td style="color:green">Completed</td>
+                  <td style="color:green">Retry</td>
                 </tr>
                 <tr>
-                  <td>Scientific Notation: Level 2, Set 2 of 4</td>
-                  <td style="color:green">` 1.05 xx 10^2 `</td>
-                  <td style="color:green">` 1 xx 10^10 `</td>
-                  <td style="color:green">` 1.05 xx 10^7 `</td>
-                  <td style="color:green">` 1.05 xx 10^1 `</td>
+                  <td>Scientific Notation</td>
+                  <td style="color:green">1</td>
+                  <td style="color:green">2 of 4</td>
+                  <td style="color:green">Completed</td>
+                  <td style="color:green">Retry</td>
                 </tr>
                 <tr>
-                  <td>Scientific Notation: Level 1, Set 1 of 4</td>
-                  <td style="color:green">` 3 xx 10^2 `</td>
-                  <td style="color:green">` 3 xx 10^10 `</td>
-                  <td style="color:green">` 3 xx 10^7 `</td>
-                  <td style="color:green">` 3 xx 10^1 `</td>
-                </tr>
-                <tr>
-                  <td>Basic Ratios: Level 4, Set 4 of 4</td>
-                  <td style="color:green">` 17/12=x/100 `</td>
-                  <td style="color:green">` 1/12=x/60 `</td>
-                  <td style="color:green">` 33/100=x/12 `</td>
-                  <td style="color:green">` 17=x/100 `</td>
-                </tr>
-                <tr>
-                    <div id='container'></div>
+                  <td>Scientific Notation</td>
+                  <td style="color:green">1</td>
+                  <td style="color:green">1 of 4</td>
+                  <td style="color:green">Completed</td>
+                  <td style="color:green">Retry</td>
                 </tr>
                 
               </tbody>
@@ -154,6 +210,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- react core javascript -->
     <script src="./react/build/react.js"></script>
@@ -173,47 +230,20 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
     
-    
-    <!-- mathhacks core javascript -->
-    <script type="text/babel">
-      var ExampleApplication = React.createClass({
-        render: function() {
-          var elapsed = Math.round(this.props.elapsed  / 100);
-          var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-          var message =
-            'React has been successfully running for ' + seconds + ' seconds.';
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_CHTML"></script>
 
-          return <p>{message}</p>;
-        }
-      });
-      var start = new Date().getTime();
-      setInterval(function() {
-        ReactDOM.render(
-          <ExampleApplication elapsed={new Date().getTime() - start} />,
-          document.getElementById('container')
-        );
-      }, 50);
-    </script>
+    <!-- The skeleton code creates an abstraction around what will eventually be middleware -->
+    <script type="text/javascript"  src="./skeleton.js"></script>
+    <script type="text/javascript"  src="./skeletonproblemsets.js"></script>
     
+    <script type="text/babel"  src="./react_timer.js"></script>
+    
+     
     <script>
         $(document).ready(function(){
-
-            $("#link-by-topic").click( function() {
-                $("#dashboard-monthly").hide();
-                $("#dashboard-topics").show();
-                $("#link-by-topic").css("font-weight", "Bold");
-                $("#link-by-month").css("font-weight", "Normal");
-
-            });
-
-            $("#link-by-month").click( function() {
-                $("#dashboard-monthly").show();
-                $("#dashboard-topics").hide();
-                $("#link-by-month").css("font-weight", "Bold");
-                $("#link-by-topic").css("font-weight", "Normal");
-               
-            });
-
+            InitDashboard();
+            SideMenuEventHandler();
+            QuestionSetClickHandler();
         });       
     </script>
     

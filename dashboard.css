@@ -115,3 +115,19 @@ body {
 .linkbutton > .active > a:focus {
     font-weight: bold;
 }
+
+.answer-correct {
+    color:black;
+    font-weight: bold;
+}
+
+.answer-incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+.answer-pending {
+    color: #122bca;
+}
+
+
