@@ -10,7 +10,7 @@
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
   <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
-  <script type="text/javascript"  src="../localmodels/leaner.js"></script>
+  <script type="text/javascript"  src="../localmodels/learner.js"></script>
 
   <script>
     QUnit.test( "Canary", function( assert ) {
@@ -19,18 +19,12 @@
     });
     
     
-    QUnit.test( "Create a learner object", function( assert ) {
-      var learnerObject = Learner();
-      assert.ok( learnerObject !==null, "Learner object not equal to null" );
+    QUnit.test( "Populate a learner object", function( assert ) {
+      var learnerObject = HYBLearner();
+      HYBLearner.firstName = "bob";
+      assert.ok( HYBLearner.firstname === "bob", "Learner object not equal to bob" );
     });
 
-    /*
-    QUnit.test( "GetNextProblemGetProblemSets not equal", function( assert ) {
-      var randomProblemSet = GetNextProblemGetProblemSet(1);
-      var otherRandomProblemSet = GetNextProblemGetProblemSet(2);
-      assert.ok( randomProblemSet.question !== otherRandomProblemSet.question, "Problem Set 1 not equal to Problem set 2" );
-    });
-    */
     
   </script>
 </body>

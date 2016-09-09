@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+<script src="../localmodels/hyb.js"></script>
+
+<script>
+
+    QUnit.test( "Canary test", function( assert ) {
+        assert.ok( 1 == "1", "Passed!" );
+    });
+
+    QUnit.test( "Get an object test", function( assert ) {
+        var myHBY = HYB;
+        assert.ok ( myHBY !== undefined, "HYB is defined" );
+    });
+
+    QUnit.test( "Get a learner model object ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        assert.ok ( learner !== undefined, "learner is defined" );
+    });
+
+
+    QUnit.test( "Learner first Name defaults to emtpy ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        assert.ok ( learner.learnerFirstName === "", "Learner First Name defaults to empty" );
+    });
+
+    QUnit.test( "Set learner first name ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        learner.SetLearnerName("bob", "olink");
+        assert.ok ( learner.learnerFirstName === "bob", "Learner First Name" );
+    });
+
+    QUnit.test( "Set learner last name ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        learner.SetLearnerName("bob", "olink");
+        assert.ok ( learner.learnerLastName === "olink", "Learner last Name" );
+    });
+
+
+    QUnit.test( "Init learner ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        learner.LearnerInit(1000);
+        assert.ok ( learner.learnerID !== 0, "Learner Initialized" );
+    });
+
+    QUnit.test( "Get Current lesson ID ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        learner.LearnerInit(1000);
+        var currentLessonId = learner.GetCurrentLesson();
+        assert.ok ( currentLessonId !== 0, "Learner current lesson ID: " + currentLessonId );
+    });
+
+    QUnit.test( "Get Next lesson ID ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        learner.LearnerInit(1000);
+        var nextLessonId = learner.GetNextLesson();
+        assert.ok ( nextLessonId !== 0, "Learner next lesson ID: " + nextLessonId );
+    });
+    
+    QUnit.test( "Current and next are not the same ", function( assert ) {
+        var myModel = HYB.Models;
+        var learner = myModel.Learner;
+        learner.LearnerInit(1000);
+        var nextLessonId = learner.GetNextLesson();
+        var currentLessonId = learner.GetCurrentLesson();
+
+        assert.ok ( nextLessonId !== currentLessonId, "Learner next lesson ID: " + nextLessonId + "  -- Learner current lesson ID: " + currentLessonId);
+    });
+    
+
+</script>
+</body>
+</html>

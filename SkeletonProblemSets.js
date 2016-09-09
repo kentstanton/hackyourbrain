@@ -1,5 +1,17 @@
 
 
+function GetNextUserProblemSet(userId) {
+    // for a given student return the next problem set to be presented
+    // sophisticated logic will eventually be needed here
+    
+    // user 1 is skeletor
+    if (userID === 1) {
+        
+    }
+    
+}
+
+
 function GetNextProblemGetProblemSet(randomSetId) {
     
     // randomSetId limited to 0 to 10
