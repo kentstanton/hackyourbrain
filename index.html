@@ -39,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="color:yellow">Hack Your Brain</a>
+          <a id="header-home-text"class="navbar-brand" href="#" style="color:yellow">Hack Your Brain</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -236,7 +236,12 @@
     <script type="text/javascript"  src="./skeleton.js"></script>
     <script type="text/javascript"  src="./skeletonproblemsets.js"></script>
     
+    <!-- load order dependencies here - need to set up module loading -->
+    <script type="text/javascript"  src="./localmodels/hyb.js"></script>
+    <script type="text/javascript"  src="./localmodels/learner.js"></script>
+    
     <script type="text/babel"  src="./react_timer.js"></script>
+    
     
      
     <script>
@@ -244,6 +249,12 @@
             InitDashboard();
             SideMenuEventHandler();
             QuestionSetClickHandler();
+            
+            var myModel = HYB.Models;
+            var learner = myModel.Learner;
+            learner.SetLearnerName("David", "O'really");
+            
+            $("#header-home-text").text("Hack Your Brain - Welcome " + learner.learnerFirstName)               
         });       
     </script>
     

@@ -1,54 +1,56 @@
-
-// learner model
 /*
-function Learner() {
-  this.firstName = "";
-  this.lastName = "";
-  this.CurrentProblemSetId = 0;
-  this.LastProblemSetId = 0;
-  this.levelId = 0;
-}
+    Learner Model
 */
-
-// HYBLearner is currently global
-var HYBLearner = (function (window, hybRoot) {
-    
-    if (HYBLearner.moduleName) { return; }
-    HYBLearner.moduleName = "learner";
-
+(function (window, HYBRoot) {
+    HYBRoot.Learner = HYBRoot.Learner || {};
+    if (HYBRoot.Learner.moduleName) { return; }
+    var HYBModule = HYBRoot.Learner;
+    HYBModule.moduleName = "Learner";
     'use strict';
 
-    HYBLearner.firstName = "";
-    HYBLearner.lastName = "";
-    HYBLearner.CurrentProblemSetId = 0;
-    HYBLearner.LastProblemSetId = 0;
-    HYBLearner.levelId = 0;
+    HYBModule.learnerFirstName = "";
+    HYBModule.learnerLastName = "";
+    HYBModule.learnerID = 0;
+    HYBModule.currentLessonId = 0;
+    HYBModule.nextLessonId = 0;
 
-    // public methods 
-    
-    /*HYBLearner.SetLearnerName = function (firstName, lastName) {
-        if (console && (typeof value != "undefined")) {
-            console.log(value);
-        };
-        
-        this.firstName = firstName;
-        this.lastName = lastName;
-        
-    };
-    */
-    
-    // Public objects
-    //this.NewObject = function () {
-    //    this.Name = "NewObject";
-    //};
+    // learner with ID 0 has not been initialized
+    HYBModule.LearnerInit = function(id) {
+        if (id < 1) {
+            return 0;
+        }
+        HYBModule.learnerID = id;
+        return id;
+    }
 
-    // Create an instance of the new object.
-    //var newObject = new HYBRoot.learner.NewObject();
+    HYBModule.SetLearnerName = function(firstName, lastName) {
+        HYBModule.learnerFirstName = firstName;
+        HYBModule.learnerLastName = lastName;
+    }
 
-    // private functions not assigned to the parent object
-    //function GetExcitingMessage(stringToFormat) {
-    //    var excitingString = stringToFormat + "!!!";
-    //    return excitingString;
-    //};
+    //  ! these will come out of the model in a future iteration !
+    // todo - hardcoded, call to middleware needed
+    HYBModule.GetCurrentLesson = function() {
+        if (HYBModule.learnerID > 0) {
+            HYBModule.currentLessonId = 100;
+            return HYBModule.currentLessonId;
+        } else {
+            return 0;
+        }
+                   
+    }
+
+    // todo - hardcoded
+    HYBModule.GetNextLesson = function() {
+        if (HYBModule.learnerID > 0) {
+            HYBModule.nextLessonId = 101;
+            return HYBModule.nextLessonId;
+        } else {
+            return 0;
+        }
+                   
+    }
     
-}) 
+    
+
+}) (window, HYB.Models);
