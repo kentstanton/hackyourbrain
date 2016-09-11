@@ -13,6 +13,12 @@
     HYBModule.learnerID = 0;
     HYBModule.currentLessonId = 0;
     HYBModule.nextLessonId = 0;
+    
+    // todo - format
+    var lastDate = Date();
+    HYBModule.lastLogin = lastDate;
+    
+    HYBModule.lastTimeOnTask = "42 minutes";
 
     // learner with ID 0 has not been initialized
     HYBModule.LearnerInit = function(id) {
@@ -53,4 +59,4 @@
     
     
 
-}) (window, HYB.Models);
+}) (window, HYB.Learner);

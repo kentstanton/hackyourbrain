@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Question Model Unit Tests</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+
+<!-- todo: create a loader for modules -->
+<!-- IMPORTANT: Note the dependency. The problem set model is used to load the problem -->
+<script src="../localmodels/hyb.js"></script>
+<script src="../localmodels/Question.js"></script>
+
+<script src="../localmodels/ProblemSet.js"></script>
+<script src="../data/mockproblemsets.js"></script>
+
+
+<script>
+
+    QUnit.test( "Canary test", function( assert ) {
+        assert.ok( 1 == "1", "Passed!" );
+    });
+
+
+    QUnit.test( "Get HYB (parent) object test", function( assert ) {
+        var myHBY = HYB;
+        assert.ok ( myHBY !== undefined, "HYB is defined" );
+    });
+
+    QUnit.test( "Get a Question model object ", function( assert ) {
+        var myModel = HYB.Question;
+        var theQuestion = myModel.Question;
+        assert.ok ( theQuestion !== undefined, "Question object is defined" );
+    });
+
+    QUnit.test( "Get Parent object (HYB) ", function( assert ) {
+        var myModel = HYB.Question;
+        assert.ok ( myModel.parentModule.moduleName === "HYB", "parent module is defined" );
+    });
+
+    QUnit.test( "Load question (dependency on ProblemSet) ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);
+        var rawQuestions = ProblemSet.ProblemRawObjects;
+
+        var aQuestion = rawQuestions[0];
+                                
+        assert.ok ( aQuestion !== null, "Load a Question from the problem set.");
+    });
+
+    QUnit.test( "First question, questionID (dependency on ProblemSet) ", function( assert ) {
+        
+        // Load the problem set
+        var psModel = HYB.ProblemSet;
+        var ProblemSet = psModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);
+        var rawQuestions = ProblemSet.ProblemRawObjects;
+        var aQuestion = rawQuestions[0];
+
+        // Instantiate a question object
+        var questionModel = HYB.Question;
+        var theQuestion = questionModel.Question;
+        var questionID = theQuestion.QuestionInit(aQuestion);
+        assert.ok ( questionID === 1, "Load a question from the problem set. Instantiate a question object.");
+    });
+    
+    
+    QUnit.test( "First question, verify correct answer is present (dependency on ProblemSet) ", function( assert ) {
+        var psModel = HYB.ProblemSet;
+        var ProblemSet = psModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);
+        var rawQuestions = ProblemSet.ProblemRawObjects;
+        var aQuestion = rawQuestions[0];
+
+        var questionModel = HYB.Question;
+        var theQuestion = questionModel.Question;
+        var questionID = theQuestion.QuestionInit(aQuestion);
+        
+        var mockKnownCorrect = 3;
+                                                
+        assert.ok ( theQuestion.correctAnswerIndex === mockKnownCorrect, "Verify that the correct answer is found");
+    });
+
+    QUnit.test( "Fifth question, verify correct answer is present (dependency on ProblemSet) ", function( assert ) {
+        var psModel = HYB.ProblemSet;
+        var ProblemSet = psModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);
+        var rawQuestions = ProblemSet.ProblemRawObjects;
+        var aQuestion = rawQuestions[4];
+
+        var questionModel = HYB.Question;
+        var theQuestion = questionModel.Question;
+        var questionID = theQuestion.QuestionInit(aQuestion);
+        
+        var mockKnownCorrect = 0;
+        assert.ok ( theQuestion.correctAnswerIndex === mockKnownCorrect, "Verify that the correct answer is found " + theQuestion.correctAnswerIndex);
+    });
+
+</script>
+</body>
+</html>

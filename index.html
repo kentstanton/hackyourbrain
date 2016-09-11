@@ -30,6 +30,7 @@
 
   <body>
 
+    <!-- top menu -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -56,6 +57,7 @@
       </div>
     </nav>
 
+    <!-- Left Side Menu Panel -->
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -76,9 +78,10 @@
         </div>
 
 
+    <!-- Current Problem Set Panel -->
         <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
-          <h1 class="page-header">Exercise 17: Scientific Notation, Level 3</h1>
-          <h3 class="page-header">You must answer all five questions correctly to move the next level.</h3>
+          <h2 class="page-header"><span id="current-problemset-name">Exercise 17: Scientific Notation, Level 3</span></h2>
+          <h4 class="page-header">Click the correct answer for each question. Answer all four questions correctly to move the next level.</h4>
           
           <div class="table-responsive">
             <table class="table table-striped">
@@ -128,14 +131,24 @@
           </div>
         </div>    
 
-        
+    
+    <!-- Dashboard Panel -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
-          <h1 class="page-header">Dashboard</h1><span class="linkbutton" style="font-weight:bold;" id="link-by-month">By Month</span><span class="linkbutton" id="link-by-topic">By Topic</span>
+          <h2 class="page-header"><span id="page-title"> </span></h2>
+          <h4 class="page-header"><span id="last-login-status">Last Login: </span></h4>
+          <h4 class="page-header"><span id="last-time-on-task">Last Login: </span></h4>
+          
+
+            <span class="linkbutton" style="font-weight:bold;" id="link-by-month">Your Progress</span>
+            <span class="linkbutton" id="link-by-topic">By Topic</span>
+          
+          <!--
           <div class="row placeholders" id="dashboard-monthly">
               <img src="./demographic.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
-              
-          </div>            
-          
+          </div>
+          -->            
+
+        <!--          
           <div class="row placeholders" id="dashboard-topics" style="display:none;">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
@@ -158,15 +171,15 @@
               <span class="text-muted">0% Complete</span>
             </div>
           </div>    
-          
+        -->  
             
           
-          <h2 class="sub-header">Recent Problem Sets:</h2>
+          <h3 class="sub-header">Recent Problem Sets:</h3>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Recent Problem Sets</th>
+                  <th>Topic</th>
                   <th>Level</th>
                   <th>Set</th>
                   <th>Status</th>
@@ -178,7 +191,7 @@
                   <td>Scientific Notation</td>
                   <td style="color:green">1</td>
                   <td style="color:green">4 of 4</td>
-                  <td style="color:Red; font-weight:bold;">To Do</td>
+                  <td style="color:Red; font-weight:bold;">Next Up - To Do</td>
                   <td style="color:#428bca; font-weight:bold;">Start</td>
                 </tr>
                   
@@ -186,7 +199,7 @@
                   <td>Scientific Notation</td>
                   <td style="color:green">1</td>
                   <td style="color:green">3 of 4</td>
-                  <td style="color:green">Completed</td>
+                  <td style="color:green">Abandoned</td>
                   <td style="color:green">Retry</td>
                 </tr>
                 <tr>
@@ -250,11 +263,14 @@
             SideMenuEventHandler();
             QuestionSetClickHandler();
             
-            var myModel = HYB.Models;
+            var myModel = HYB.Learner;
             var learner = myModel.Learner;
-            learner.SetLearnerName("David", "O'really");
+            learner.SetLearnerName("David", "O'Really");
             
-            $("#header-home-text").text("Hack Your Brain - Welcome " + learner.learnerFirstName)               
+            $("#page-title").text(learner.learnerFirstName + ", Your Recent Activity" );
+            $("#last-login-status").text("Last Login: " + learner.lastLogin);  
+            $("#last-time-on-task").text("Last Time On Task: " + learner.lastTimeOnTask);  
+                         
         });       
     </script>
     

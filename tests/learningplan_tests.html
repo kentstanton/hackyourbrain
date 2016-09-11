@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ProblemSet Model Unit Tests</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+<script src="../localmodels/hyb.js"></script>
+<script src="../localmodels/learningplan.js"></script>
+
+<script>
+
+    QUnit.test( "Canary test", function( assert ) {
+        assert.ok( 1 == "1", "Passed!" );
+    });
+
+
+    QUnit.test( "Get an object test", function( assert ) {
+        var myHBY = HYB;
+        assert.ok ( myHBY !== undefined, "HYB is defined" );
+    });
+
+    QUnit.test( "Get a LearningPlan model object ", function( assert ) {
+        var myModel = HYB.LearningPlan;
+        var LearningPlan = myModel.LearningPlan;
+        assert.ok ( LearningPlan !== undefined, "LearningPlan is defined" );
+    });
+
+    QUnit.test( "Get Parent object (HYB) ", function( assert ) {
+        var myModel = HYB.LearningPlan;
+        assert.ok ( myModel.parentModule.moduleName === "HYB", "parent module is defined" );
+    });
+
+    QUnit.test( "LearningPlan Name defaults to emtpy ", function( assert ) {
+        var myModel = HYB.LearningPlan;
+        var LearningPlan = myModel.LearningPlan;
+        assert.ok ( LearningPlan.LearningPlanName === "", "LearningPlan Name defaults to empty" );
+    });
+
+    QUnit.test( "Set LearningPlan name ", function( assert ) {
+        var myModel = HYB.LearningPlan;
+        var LearningPlan = myModel.LearningPlan;
+        LearningPlan.SetLearningPlanName("Physics Mastery: Level 1");
+        assert.ok ( LearningPlan.LearningPlanName === "Physics Mastery: Level 1", "Set Learning Plan Name: " + LearningPlan.LearningPlanName);
+    });
+
+    QUnit.test( "Get LearningPlan Problem Set sequence ", function( assert ) {
+        var myModel = HYB.LearningPlan;
+        var LearningPlan = myModel.LearningPlan;
+        var lpps_sequence = LearningPlan.GetLearningPlanProblemSetSequence();
+        assert.ok ( lpps_sequence.length > 0, "Set Learning problem set count > 0: " + lpps_sequence.length);
+    });
+
+</script>
+</body>
+</html>

@@ -1,4 +1,7 @@
 
+/*
+    This is the module loader. Eventually I'll want to separate the modules by type. 
+*/
 
 // Define HYB as a global
 if (typeof HYB == "undefined") {
@@ -11,7 +14,7 @@ if (typeof HYB == "undefined") {
         var _HYB = HYBRoot;
 
         // Expose jQuery to the global object
-        window.InformzJavaScript = window.HYB = HYB;
+        window.HYBJavascript = window.HYB = HYB;
         HYB.version = 1.0;
         HYB.moduleName = "HYB";
         HYB.GetReleaseInfo = function () { return "pre-relesae"; }
@@ -20,75 +23,59 @@ if (typeof HYB == "undefined") {
 
 
     // initialize the HYB (hackyourbrain) modules here
-    // models
-    (HYB.Models = function (window, HYBRoot) {
-        HYBRoot.Models = HYBRoot.Models || {};
-        if (HYBRoot.Models.moduleName) { return; }
+    // Learner
+    (HYB.Learner = function (window, HYBRoot) {
+        HYBRoot.Learner = HYBRoot.Learner || {};
+        if (HYBRoot.Learner.moduleName) { return; }
 
-        HYB.Models.moduleName = "Models";
-        HYB.Models.parentModule = HYBRoot;
-        HYB.Models.version = HYBRoot.version;
+        HYB.Learner.moduleName = "Learner";
+        HYB.Learner.parentModule = HYBRoot;
+        HYB.Learner.version = HYBRoot.version;
     }) (window, HYB);
 
+    // ProblemSet
+    (HYB.ProblemSet = function (window, HYBRoot) {
+        HYBRoot.ProblemSet = HYBRoot.ProblemSet || {};
+        if (HYBRoot.ProblemSet.moduleName) { return; }
+
+        HYB.ProblemSet.moduleName = "ProblemSet";
+        HYB.ProblemSet.parentModule = HYBRoot;
+        HYB.ProblemSet.version = HYBRoot.version;
+    }) (window, HYB);
+    
+    // Question
+    // A problem set contains one or more questions
+    (HYB.Question = function (window, HYBRoot) {
+        HYBRoot.Question = HYBRoot.Question || {};
+        if (HYBRoot.Question.moduleName) { return; }
+
+        HYB.Question.moduleName = "Question";
+        HYB.Question.parentModule = HYBRoot;
+        HYB.Question.version = HYBRoot.version;
+    }) (window, HYB);
+        
+    // LearningPlan
+    (HYB.LearningPlan = function (window, HYBRoot) {
+        HYBRoot.LearningPlan = HYBRoot.LearningPlan || {};
+        if (HYBRoot.LearningPlan.moduleName) { return; }
+
+        HYB.LearningPlan.moduleName = "LearningPlan";
+        HYB.LearningPlan.parentModule = HYBRoot;
+        HYB.LearningPlan.version = HYBRoot.version;
+    }) (window, HYB);
+
+    // ProblemSet controller
+    /* NOT CURRENTLY USED
+    (HYB.ProblemSetController = function (window, HYBRoot) {
+        HYBRoot.ProblemSetController = HYBRoot.ProblemSetController || {};
+        if (HYBRoot.ProblemSetController.moduleName) { return; }
+
+        HYB.ProblemSetController.moduleName = "ProblemSetController";
+        HYB.ProblemSetController.parentModule = HYBRoot;
+        HYB.ProblemSetController.version = HYBRoot.version;
+    }) (window, HYB);
+    */
 
 }
 
 
-
-
-/*
-    Learner Model
-*/
-(function (window, HYBRoot) {
-    HYBRoot.Learner = HYBRoot.Learner || {};
-    if (HYBRoot.Learner.moduleName) { return; }
-    var HYBModule = HYBRoot.Learner;
-    HYBModule.moduleName = "Learner";
-    'use strict';
-
-    HYBModule.learnerFirstName = "";
-    HYBModule.learnerLastName = "";
-    HYBModule.learnerID = 0;
-    HYBModule.currentLessonId = 0;
-    HYBModule.nextLessonId = 0;
-
-    // learner with ID 0 has not been initialized
-    HYBModule.LearnerInit = function(id) {
-        if (id < 1) {
-            return 0;
-        }
-        HYBModule.learnerID = id;
-        return id;
-    }
-
-    HYBModule.SetLearnerName = function(firstName, lastName) {
-        HYBModule.learnerFirstName = firstName;
-        HYBModule.learnerLastName = lastName;
-    }
-
-    //  ! these will come out of the model in a future iteration !
-    // todo - hardcoded, call to middleware needed
-    HYBModule.GetCurrentLesson = function() {
-        if (HYBModule.learnerID > 0) {
-            HYBModule.currentLessonId = 100;
-            return HYBModule.currentLessonId;
-        } else {
-            return 0;
-        }
-                   
-    }
-
-    // todo - hardcoded
-    HYBModule.GetNextLesson = function() {
-        if (HYBModule.learnerID > 0) {
-            HYBModule.nextLessonId = 101;
-            return HYBModule.nextLessonId;
-        } else {
-            return 0;
-        }
-                   
-    }
-    
-    
-
-}) (window, HYB.Models);

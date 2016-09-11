@@ -64,6 +64,7 @@ function AddAnswerEventHandlers(problemSet) {
 
 }
 
+// menus
 function SideMenuEventHandler() {             
     $("#menu-item-currentproblems").click( function() {
         DisableAllMenuItems();    
@@ -101,7 +102,9 @@ function SideMenuEventHandler() {
         $("#menu-item-reports").addClass("active");
     } );
 }
-            
+
+
+// menus            
 function DisableAllMenuItems() {
     $("#menu-item-dashboard").removeClass("active");
     $("#menu-item-currentproblems").removeClass("active");
