@@ -13,11 +13,13 @@
 <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
 <script src="../localmodels/hyb.js"></script>
 <script src="../localmodels/learner.js"></script>
+<script src="../data/mocklearner.js"></script>
+
 
 <script>
 
     QUnit.test( "Canary test", function( assert ) {
-        assert.ok( 1 == "1", "Passed!" );
+        assert.ok( 1 === 1, "Passed!" );
     });
 
     QUnit.test( "Get an object test", function( assert ) {
@@ -28,81 +30,38 @@
     QUnit.test( "Get a learner model object ", function( assert ) {
         var myModel = HYB.Learner;
         var learner = myModel.Learner;
-        assert.ok ( learner !== undefined, "learner is defined" );
+        assert.ok ( learner !== undefined, "learner object is defined" );
     });
 
     QUnit.test( "Get Parent object (HYB) ", function( assert ) {
         var myModel = HYB.Learner;
         assert.ok ( myModel.parentModule.moduleName === "HYB", "parent module is defined" );
     });
-
-    QUnit.test( "Learner first Name defaults to emtpy ", function( assert ) {
+    
+    QUnit.test( "Learner first Name not empty", function( assert ) {
         var myModel = HYB.Learner;
         var learner = myModel.Learner;
-        assert.ok ( learner.learnerFirstName === "", "Learner First Name defaults to empty" );
+        learner.LearnerInit(mockLearner);
+        assert.ok ( learner.learnerFirstName === "David", "Learner First Name from mock -- " + learner.learnerFirstName);
     });
 
-    QUnit.test( "Set learner first name ", function( assert ) {
+    QUnit.test( "Learner last login ", function( assert ) {
         var myModel = HYB.Learner;
         var learner = myModel.Learner;
-        learner.SetLearnerName("bob", "olink");
-        assert.ok ( learner.learnerFirstName === "bob", "Learner First Name" );
-    });
-
-    QUnit.test( "Set learner last name ", function( assert ) {
-        var myModel = HYB.Learner;
-        var learner = myModel.Learner;
-        learner.SetLearnerName("bob", "olink");
-        assert.ok ( learner.learnerLastName === "olink", "Learner last Name" );
-    });
-
-
-    QUnit.test( "Init learner ", function( assert ) {
-        var myModel = HYB.Learner;
-        var learner = myModel.Learner;
-        learner.LearnerInit(1000);
-        assert.ok ( learner.learnerID !== 0, "Learner Initialized" );
-    });
-
-    QUnit.test( "Get Current lesson ID ", function( assert ) {
-        var myModel = HYB.Learner;
-        var learner = myModel.Learner;
-        learner.LearnerInit(1000);
-        var currentLessonId = learner.GetCurrentLesson();
-        assert.ok ( currentLessonId !== 0, "Learner current lesson ID: " + currentLessonId );
-    });
-
-    QUnit.test( "Get Next lesson ID ", function( assert ) {
-        var myModel = HYB.Learner;
-        var learner = myModel.Learner;
-        learner.LearnerInit(1000);
-        var nextLessonId = learner.GetNextLesson();
-        assert.ok ( nextLessonId !== 0, "Learner next lesson ID: " + nextLessonId );
+        learner.LearnerInit(mockLearner);
+        assert.ok ( learner.lastLoginDate === "9/7/2016 3:20 pm", "Learner last login from mock -- " + learner.lastLoginDate);
     });
     
     QUnit.test( "Current and next are not the same ", function( assert ) {
         var myModel = HYB.Learner;
         var learner = myModel.Learner;
-        learner.LearnerInit(1000);
+        learner.LearnerInit(mockLearner);
         var nextLessonId = learner.GetNextLesson();
         var currentLessonId = learner.GetCurrentLesson();
 
         assert.ok ( nextLessonId !== currentLessonId, "Learner next lesson ID: " + nextLessonId + "  -- Learner current lesson ID: " + currentLessonId);
     });
     
-    QUnit.test( "Get last login date ", function( assert ) {
-        var myModel = HYB.Learner;
-        var learner = myModel.Learner;
-        learner.LearnerInit(1000);
-        assert.ok ( learner.lastLogin !== undefined, "Last login date: " + learner.lastLogin );
-    });
-
-    QUnit.test( "Get time on task ", function( assert ) {
-        var myModel = HYB.Learner;
-        var learner = myModel.Learner;
-        learner.LearnerInit(1000);
-        assert.ok ( learner.lastTimeOnTask !== undefined, "Last time on task: " + learner.lastTimeOnTask );
-    });
 
 </script>
 </body>

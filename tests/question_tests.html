@@ -107,6 +107,22 @@
         assert.ok ( theQuestion.correctAnswerIndex === mockKnownCorrect, "Verify that the correct answer is found " + theQuestion.correctAnswerIndex);
     });
 
+    QUnit.test( "Answers array is populated (dependency on ProblemSet) ", function( assert ) {
+        var psModel = HYB.ProblemSet;
+        var ProblemSet = psModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);
+        var rawQuestions = ProblemSet.ProblemRawObjects;
+        var aQuestion = rawQuestions[1];
+
+        var questionModel = HYB.Question;
+        var theQuestion = questionModel.Question;
+        var questionID = theQuestion.QuestionInit(aQuestion);
+        
+        var answerCountExpected = 4;
+        assert.ok ( theQuestion.answers.length === answerCountExpected, "Number of answsers: " + theQuestion.answers.length);
+    });
+
 </script>
 </body>
 </html>

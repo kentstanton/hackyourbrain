@@ -117,12 +117,12 @@ body {
 }
 
 .answer-correct {
-    color:black;
+    color: #122bca;
     font-weight: bold;
 }
 
 .answer-incorrect {
-    color: red;
+    color: #122bca;
     font-weight: bold;
 }
 

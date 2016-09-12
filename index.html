@@ -13,7 +13,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-
    
     <!-- Custom styles for this template -->
     <link href="./dashboard.css" rel="stylesheet">
@@ -24,10 +23,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-
   </head>
-
   <body>
 
     <!-- top menu -->
@@ -95,36 +91,6 @@
                 </tr>
               </thead>
               <tbody id="problem-set-table">
-                <tr id="question-row-1">
-                  <td >` 6.72 xx 10^3 `</td>
-                  <td style="color:#428bca;cursor:hand;" id="q1-a1">` 6720 `</a></td>
-                  <td style="color:#428bca" id="q1-a2">` 672 `</a></td>
-                  <td style="color:#428bca" id="q1-a3">` .672 `</a></td>
-                  <td style="color:#428bca" id="q1-a4">` 672000 `</a></td>
-                </tr>
-                <tr>
-                  <td>` 1.05 xx 10^2 `</td>
-                  <td style="color:green">` 1.05 xx 10^2 `</td>
-                  <td style="color:green">` 1 xx 10^10 `</td>
-                  <td style="color:green">` 1.05 xx 10^7 `</td>
-                  <td style="color:green">` 1.05 xx 10^1 `</td>
-                </tr>
-                <tr>
-                  <td>` 3 xx 10^2 `</td>
-                  <td style="color:green">` 3 xx 10^2 `</td>
-                  <td style="color:green">` 3 xx 10^10 `</td>
-                  <td style="color:green">` 3 xx 10^7 `</td>
-                  <td style="color:green">` 3 xx 10^1 `</td>
-                </tr>
-
-                <tr>
-                  <td>` 17/12 xx 10^1 `</td>
-                  <td style="color:green">` 17/12=x/100 `</td>
-                  <td style="color:green">` 1/12=x/60 `</td>
-                  <td style="color:green">` 33/100=x/12 `</td>
-                  <td style="color:green">` 17=x/100 `</td>
-                </tr>
-                
                 <tr id="container"></tr>                
               </tbody>
             </table>
@@ -134,11 +100,9 @@
     
     <!-- Dashboard Panel -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
-          <h2 class="page-header"><span id="page-title"> </span></h2>
-          <h4 class="page-header"><span id="last-login-status">Last Login: </span></h4>
-          <h4 class="page-header"><span id="last-time-on-task">Last Login: </span></h4>
-          
-
+            <h2 class="page-header"><span id="page-title"> </span></h2>
+            <h4 class="page-header"><span id="last-login-status">Last Login: </span></h4>
+            <h4 class="page-header"><span id="last-time-on-task">Last Login: </span></h4>
             <span class="linkbutton" style="font-weight:bold;" id="link-by-month">Your Progress</span>
             <span class="linkbutton" id="link-by-topic">By Topic</span>
           
@@ -147,32 +111,6 @@
               <img src="./demographic.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
           </div>
           -->            
-
-        <!--          
-          <div class="row placeholders" id="dashboard-topics" style="display:none;">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Scientific Noation</h4>
-              <span class="text-muted">65% Complete</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Basic Ratios</h4>
-              <span class="text-muted">100%</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Advanced Ratios </h4>
-              <span class="text-muted">0% Complete</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Ratio Challenges</h4>
-              <span class="text-muted">0% Complete</span>
-            </div>
-          </div>    
-        -->  
-            
           
           <h3 class="sub-header">Recent Problem Sets:</h3>
           <div class="table-responsive">
@@ -252,24 +190,31 @@
     <!-- load order dependencies here - need to set up module loading -->
     <script type="text/javascript"  src="./localmodels/hyb.js"></script>
     <script type="text/javascript"  src="./localmodels/learner.js"></script>
-    
+    <script type="text/javascript"  src="./localmodels/learningplan.js"></script>
+    <script type="text/javascript"  src="./localmodels/problemset.js"></script>
+    <script type="text/javascript"  src="./localmodels/question.js"></script>
+
+    <!-- Mocks for data until middleware is created -->
+    <script type="text/javascript"  src="./data/mocklearner.js"></script>
+    <script type="text/javascript"  src="./data/mockproblemsets.js"></script>
+
     <script type="text/babel"  src="./react_timer.js"></script>
     
     
      
     <script>
         $(document).ready(function(){
-            InitDashboard();
-            SideMenuEventHandler();
-            QuestionSetClickHandler();
-            
+
+            // move to React component            
             var myModel = HYB.Learner;
             var learner = myModel.Learner;
-            learner.SetLearnerName("David", "O'Really");
-            
+            learner.LearnerInit(mockLearner);
             $("#page-title").text(learner.learnerFirstName + ", Your Recent Activity" );
-            $("#last-login-status").text("Last Login: " + learner.lastLogin);  
+            $("#last-login-status").text("Last Login: " + learner.lastLoginDate);  
             $("#last-time-on-task").text("Last Time On Task: " + learner.lastTimeOnTask);  
+
+            InitDashboard();
+            SideMenuEventHandler(learner.GetCurrentLesson());
                          
         });       
     </script>

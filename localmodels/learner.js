@@ -13,50 +13,43 @@
     HYBModule.learnerID = 0;
     HYBModule.currentLessonId = 0;
     HYBModule.nextLessonId = 0;
+    HYBModule.lastLoginDate = "";
+    HYBModule.lastTimeOnTask = "";
     
-    // todo - format
-    var lastDate = Date();
-    HYBModule.lastLogin = lastDate;
-    
-    HYBModule.lastTimeOnTask = "42 minutes";
+    // todo - middleware
+    HYBModule.LearnerInit = function(learnerRaw) {
 
-    // learner with ID 0 has not been initialized
-    HYBModule.LearnerInit = function(id) {
-        if (id < 1) {
-            return 0;
-        }
-        HYBModule.learnerID = id;
-        return id;
+        HYBModule.learnerFirstName = learnerRaw.firstName;
+        HYBModule.learnerLastName = learnerRaw.lastName;
+        HYBModule.learnerID = learnerRaw.learnerID;
+        HYBModule.currentLessonId = learnerRaw.currentLessonId;
+        HYBModule.nextLessonId = learnerRaw.nextLessonId;
+        HYBModule.lastLoginDate = learnerRaw.lastLoginDate;
+        HYBModule.lastTimeOnTask = learnerRaw.timeOnTask;
+        
+        HYBModule.initSuccess = true;
+        return HYBModule.learnerId;    
+
     }
 
-    HYBModule.SetLearnerName = function(firstName, lastName) {
-        HYBModule.learnerFirstName = firstName;
-        HYBModule.learnerLastName = lastName;
-    }
 
     //  ! these will come out of the model in a future iteration !
     // todo - hardcoded, call to middleware needed
     HYBModule.GetCurrentLesson = function() {
-        if (HYBModule.learnerID > 0) {
-            HYBModule.currentLessonId = 100;
+        if (HYBModule.initSuccess) {
             return HYBModule.currentLessonId;
         } else {
             return 0;
         }
-                   
     }
 
     // todo - hardcoded
     HYBModule.GetNextLesson = function() {
-        if (HYBModule.learnerID > 0) {
-            HYBModule.nextLessonId = 101;
+        if (HYBModule.initSuccess) {
             return HYBModule.nextLessonId;
         } else {
             return 0;
         }
-                   
     }
-    
-    
-
+ 
 }) (window, HYB.Learner);

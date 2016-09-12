@@ -13,7 +13,6 @@
     HYBModule.ProblemSetTopic = 0;
     HYBModule.ProblemSetId = 0;
     HYBModule.ProblemSetQuestionCount = 0;
-    
     HYBModule.ProblemRawObjects = "";
 
     // ProblemSet with ID 0 has not been initialized
@@ -34,16 +33,15 @@
         HYBModule.ProblemSetId = problemSetId;
         
         // todo: extract and robustify
-        var mocks = mockProblemSets;
-        for (var i=0; i < mocks.length; i++) {
-            if (mocks[i].id === problemSetId) {
-                HYBModule.ProblemSetName = mocks[i].name;
-                HYBModule.ProblemSetQuestionCount = mocks[i].problems.length;
-                HYBModule.ProblemRawObjects = mocks[i].problems;
+        var problemSets = mockProblemSets;
+        for (var i=0; i < problemSets.length; i++) {
+            if (problemSets[i].id === problemSetId) {
+                HYBModule.ProblemSetName = problemSets[i].name;
+                HYBModule.ProblemSetQuestionCount = problemSets[i].problems.length;
+                HYBModule.ProblemRawObjects = problemSets[i].problems;
                 err = 0;
             }
         }
-
 
         // todo - exception handling should replace this
         if (err === 1) {

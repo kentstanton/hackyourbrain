@@ -27,9 +27,9 @@ var mockProblemSets = [
 
             {
                 "questionId" : 4,
-                "question" : ".00072 xx 10^3",
-                "answers" : [".72",".072000","72",".0072"],
-                "correct" : ".72"
+                "question" : "72 xx 10^3",
+                "answers" : [".72",".072000","72","72000"],
+                "correct" : "72000"
             },
             
             {
