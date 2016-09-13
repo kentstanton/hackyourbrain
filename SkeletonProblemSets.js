@@ -1,8 +1,15 @@
 
 
-function GetNextProblemSet(currentProblemSetID) {
+function GetProblemSetTitle(currentProblemSetID) {
+   var psModel = HYB.ProblemSet;
+    var ProblemSet = psModel.ProblemSet;
+    var problemSetId = ProblemSet.LoadProblemSet(currentProblemSetID);
+    var psTitle = ProblemSet.ProblemSetName + "; Level: " + ProblemSet.ProblemSetLevel + "; Sequence: " + ProblemSet.ProblemSetSequence
+    return psTitle;
+}
 
-    var psModel = HYB.ProblemSet;
+function GetNextProblemSet(currentProblemSetID) {
+   var psModel = HYB.ProblemSet;
     var ProblemSet = psModel.ProblemSet;
     var problemSetId = ProblemSet.LoadProblemSet(currentProblemSetID);
     var rawQuestions = ProblemSet.ProblemRawObjects;

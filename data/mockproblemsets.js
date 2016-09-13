@@ -2,7 +2,9 @@
 var mockProblemSets = [ 
     {
         "id" : 100,
-        "name" : "Scientific Notation; Level 1",
+        "name" : "Scientific Notation",
+        "level" : 1,
+        "sequence" : 1,             
         "problems" : [
             {
                 "questionId" : 1,
@@ -21,8 +23,8 @@ var mockProblemSets = [
             {
                 "questionId" : 3,
                 "question" : ".00072 xx 10^3",
-                "answers" : [".72",".072000","72",".0072"],
-                "correct" : ".72"
+                "answers" : [".72",".072","72",".0072"],
+                "correct" : ".072"
             },
 
             {
@@ -43,6 +45,9 @@ var mockProblemSets = [
     
     {
         "id" : 101,
+        "name" : "Scientific Notation",
+        "level" : 1,
+        "sequence" : 1,             
         "problems" : [
             {
                 "questionId" : 1,

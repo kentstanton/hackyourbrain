@@ -10,10 +10,14 @@
 
     HYBModule.ProblemSetName = "";
     HYBModule.ProblemSetLevel = "";
+    HYBModule.ProblemSetSequence = "";
+    
+    HYBModule.ProblemSetLevel = "";
     HYBModule.ProblemSetTopic = 0;
     HYBModule.ProblemSetId = 0;
     HYBModule.ProblemSetQuestionCount = 0;
     HYBModule.ProblemRawObjects = "";
+    
 
     // ProblemSet with ID 0 has not been initialized
     HYBModule.ProblemSetInit = function(id) {
@@ -27,16 +31,20 @@
     HYBModule.SetProblemSetName = function(ProblemSetName) {
         HYBModule.ProblemSetName = ProblemSetName;
     }
-
+    
+    
     HYBModule.LoadProblemSet = function(problemSetId) {
         var err = 1;
         HYBModule.ProblemSetId = problemSetId;
         
-        // todo: extract and robustify
+        // iterate over the problem sets
         var problemSets = mockProblemSets;
         for (var i=0; i < problemSets.length; i++) {
             if (problemSets[i].id === problemSetId) {
                 HYBModule.ProblemSetName = problemSets[i].name;
+                HYBModule.ProblemSetLevel = problemSets[i].level;
+                HYBModule.ProblemSetSequence = problemSets[i].sequence;
+                
                 HYBModule.ProblemSetQuestionCount = problemSets[i].problems.length;
                 HYBModule.ProblemRawObjects = problemSets[i].problems;
                 err = 0;

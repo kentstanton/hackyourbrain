@@ -116,18 +116,8 @@ body {
     font-weight: bold;
 }
 
-.answer-correct {
-    color: #122bca;
-    font-weight: bold;
-}
-
-.answer-incorrect {
-    color: #122bca;
-    font-weight: bold;
-}
-
 .answer-pending {
-    color: #122bca;
+    color: black;
 }
 
 

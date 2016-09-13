@@ -1,6 +1,7 @@
 
 
 // todo : use mathjax to render mathml and then insert the rendered content
+// convert to use react components
 function AddProblemRow(questionSet) {
     
     var problemSetHtml = "";
@@ -20,78 +21,52 @@ function AddProblemRow(questionSet) {
             }
             problemSetHtml = problemSetHtml + answerID + '"> ` ' + theQuestion.answers[answerLoopCounter] + '  ` </td><';
             
-            $(theQuestion.answers[answerLoopCounter]).click( function() {
-                if (theQuestion.answers[answerLoopCounter] === answerLoopCounter) {
-                    $(theQuestion.answers[answerLoopCounter]).css('color', 'green');
-                } else {
-                    $(theQuestion.answers[answerLoopCounter]).css('color', 'red');
-                }
-            });    
-
-            
-            
         }
 
         // end the row          
         problemSetHtml = problemSetHtml + '</tr>';
-        
-        //AddAnswerEventHandlers(theQuestion, questionLoopCounter);            
     }
+    
     $("#problem-set-table").html(problemSetHtml);
+    
+    $(".answer-correct").click( function() { $( this ).css('background-color', 'green'); });
+    $(".answer-incorrect").click( function() { $( this ).css('background-color', 'red'); });
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
 
 
-// obsolete
-function AddAnswerEventHandlers(theQuestion, questionIndex) {
-    var answer4Id = "#question" + questionIndex + "-answer4";
-    $(answer4Id).click( function() {
-        if (theQuestion.correctAnswerIndex === 3) {
-            $(answer4Id).css('color', 'green');
-        } else {
-            $(answer4Id).css('color', 'red');
-        }
-    });    
-    
-    $("#question" + questionIndex + "-answer1").click( function() {
-        if (theQuestion.correctAnswerIndex === 0) {
-             $("#current-answer1").css('color', 'green');
-        } else {
-            $("#current-answer1").css('color', 'red');
-        }
-    });
 
-    $("#question" + questionIndex + "-answer2").click( function() {
-        if (theQuestion.correctAnswerIndex === 1) {
-             $("#current-answer2").css('color', 'green');
-        } else {
-            $("#current-answer2").css('color', 'red');
-        }
-    });
 
-    $("#question" + questionIndex + "-answer3").click( function() {
-        if (theQuestion.correctAnswerIndex === 2) {
-             $("#current-answer3").css('color', 'green');
-        } else {
-            $("#current-answer3").css('color', 'red');
-        }
-    });
-
+function SetProblemSetTitle(problemSetTitle) {
+    $("#current-problemset-name").text(problemSetTitle);    
 }
 
-// menus
+
+function UILoadQuestionsPanel(currentProblemSetID) {
+    var questionSet = GetNextProblemSet(currentProblemSetID);
+    AddProblemRow(questionSet);
+
+    var psTitle = GetProblemSetTitle(currentProblemSetID); 
+    SetProblemSetTitle(psTitle);
+}
+
+
+
+// menu handlers
 function SideMenuEventHandler(currentProblemSetID) {
     
     // load the current problems pane
     // move to a component            
     $("#menu-item-currentproblems").click( function() {
+        
+        // manage menu and hide dashboard panel
         DisableAllMenuItems();    
         $("#menu-item-currentproblems").addClass("active");
         $("#dashboard_body").hide();
         
-        var questionSet = GetNextProblemSet(currentProblemSetID);
-        AddProblemRow(questionSet);
+        UILoadQuestionsPanel(currentProblemSetID);
         
+        // show questions panel
         $("#current_problemset_body").show();
 
     } );

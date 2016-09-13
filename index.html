@@ -76,8 +76,8 @@
 
     <!-- Current Problem Set Panel -->
         <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
-          <h2 class="page-header"><span id="current-problemset-name">Exercise 17: Scientific Notation, Level 3</span></h2>
-          <h4 class="page-header">Click the correct answer for each question. Answer all four questions correctly to move the next level.</h4>
+          <h2 class="page-header"><span id="current-problemset-name"></span></h2>
+          <h4 class="page-header">Click the correct answer for each question. Answer the questions in the set correctly to move the next level.</h4>
           
           <div class="table-responsive">
             <table class="table table-striped">
@@ -94,6 +94,7 @@
                 <tr id="container"></tr>                
               </tbody>
             </table>
+            <a id="next-problem-set-link" href="">Next Problem Set</a>
           </div>
         </div>    
 
@@ -101,8 +102,8 @@
     <!-- Dashboard Panel -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
             <h2 class="page-header"><span id="page-title"> </span></h2>
-            <h4 class="page-header"><span id="last-login-status">Last Login: </span></h4>
-            <h4 class="page-header"><span id="last-time-on-task">Last Login: </span></h4>
+            <h4 class="page-header"><span id="last-login-status"></span></h4>
+            <h4 class="page-header"><span id="last-time-on-task"></span></h4>
             <span class="linkbutton" style="font-weight:bold;" id="link-by-month">Your Progress</span>
             <span class="linkbutton" id="link-by-topic">By Topic</span>
           
@@ -112,7 +113,7 @@
           </div>
           -->            
           
-          <h3 class="sub-header">Recent Problem Sets:</h3>
+          <h3 class="sub-header">Recent Problem Sets: (mock data)</h3>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -211,7 +212,7 @@
             learner.LearnerInit(mockLearner);
             $("#page-title").text(learner.learnerFirstName + ", Your Recent Activity" );
             $("#last-login-status").text("Last Login: " + learner.lastLoginDate);  
-            $("#last-time-on-task").text("Last Time On Task: " + learner.lastTimeOnTask);  
+            $("#last-time-on-task").text("Last Session; Time On Task: " + learner.lastTimeOnTask);  
 
             InitDashboard();
             SideMenuEventHandler(learner.GetCurrentLesson());

@@ -8,7 +8,7 @@ if (typeof HYB == "undefined") {
 
     'use strict';
 
-    /** HYB **/
+    /** HYB is the global representing the current session **/
     var HYB = HYB || {};
     (HYB = function (window, HYBRoot) {
         var _HYB = HYBRoot;
@@ -18,6 +18,8 @@ if (typeof HYB == "undefined") {
         HYB.version = 1.0;
         HYB.moduleName = "HYB";
         HYB.GetReleaseInfo = function () { return "pre-relesae"; }
+        HYB.currentProblemSetId = 0;
+        HYB.nextProblemSetId = 0;
 
     })(window, HYB);
 
