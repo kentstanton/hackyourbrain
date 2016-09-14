@@ -1,5 +1,7 @@
 /*
     Learning Plan Model
+    A learning plan represents a sequence of challenges (question sets) a student will complete.
+    A "Challenge" is the abstract representation of a question set reprsenting the student status but not the quetions themselves
 */
 (function (window, HYBRoot) {
     HYBRoot.LearningPlan = HYBRoot.LearningPlan || {};
@@ -11,28 +13,28 @@
     HYBModule.LearningPlanName = "";
     HYBModule.LearningPlanLevel = "";
     HYBModule.LearningPlanId = 0;
-    
-    HYBModule.LearningPlanProblemSetSequence = [100,101,102,103];
-    
+    HYBModule.LearningPlanChallengeSequence = [];
 
-    // ProblemSet with ID 0 has not been initialized
-    HYBModule.LearningPlanInit = function(id) {
-        if (id < 1) {
-            return 0;
+    // todo - mock data, call to middleware needed
+    HYBModule.GetChallengeSequence = function() {
+        var leaningPlan = mockLearningPlan;
+        for (var i=0; i < leaningPlan.Challenges.length; i++) {
+            leaningPlan.Challenges[i].ChallengesId;
+            HYBModule.LearningPlanChallengeSequence.push(leaningPlan.Challenges[i].ChallengeId);
         }
-        HYBModule.LearningPlanId = id;
-        return id;
-    }
-
-    HYBModule.SetLearningPlanName = function(PlanName) {
-        HYBModule.LearningPlanName = PlanName;
-    }
-
-    //  ! these will come out of the model in a future iteration !
-    // todo - hardcoded, call to middleware needed
-    HYBModule.GetLearningPlanProblemSetSequence = function() {
-        return HYBModule.LearningPlanProblemSetSequence;
+        return HYBModule.LearningPlanChallengeSequence;
     }
     
+    // todo - mock data, call to middleware needed
+    HYBModule.GetChallengeById = function(challengeID) {
+        var leaningPlan = mockLearningPlan;
+        for (var i=0; i < leaningPlan.Challenges.length; i++) {
+            if (leaningPlan.Challenges[i].ChallengeId === challengeID) {
+                return leaningPlan.Challenges[i];
+            }
+        }
+        return null;
+    }
+
 
 }) (window, HYB.LearningPlan);

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ProblemSet Model Unit Tests</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+
+<!-- todo: create a loader for modules -->
+<script src="../../localmodels/hyb.js"></script>
+<script src="../../localmodels/ProblemSet.js"></script>
+<script src="../../data/mockproblemsets.js"></script>
+
+
+<script>
+
+    QUnit.test( "Canary test", function( assert ) {
+        assert.ok( 1 == "1", "Passed!" );
+    });
+
+
+    QUnit.test( "Get an object test", function( assert ) {
+        var myHBY = HYB;
+        assert.ok ( myHBY !== undefined, "HYB is defined" );
+    });
+
+    QUnit.test( "Get a ProblemSet model object ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        assert.ok ( ProblemSet !== undefined, "ProblemSet is defined" );
+    });
+
+    QUnit.test( "Get Parent object (HYB) ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        assert.ok ( myModel.parentModule.moduleName === "HYB", "parent module is defined" );
+    });
+
+    QUnit.test( "ProblemSet Name defaults to emtpy ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        assert.ok ( ProblemSet.ProblemSetName === "", "ProblemSet Name defaults to empty" );
+    });
+
+    QUnit.test( "Set ProblemSet name ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        ProblemSet.SetProblemSetName("Scientific Notation: Level 1, Problem Set 3");
+        assert.ok ( ProblemSet.ProblemSetName === "Scientific Notation: Level 1, Problem Set 3", "Set ProblemSet Name: " + ProblemSet.ProblemSetName);
+    });
+    
+    QUnit.test( "Load Problem Set ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);        
+        assert.ok ( problemSetId === psID, "Load a problem set ");
+    });
+    
+    QUnit.test( "Load Problem Set: check name ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);        
+        assert.ok ( ProblemSet.ProblemSetName === "Scientific Notation", "Problem set exptected name: 'Scientific Notation; Level 1'");
+    });
+
+    QUnit.test( "Load Problem Set: count questions ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);        
+        assert.ok ( ProblemSet.ProblemSetQuestionCount === 5, "Problem set count questions: " + ProblemSet.ProblemSetQuestionCount);
+    });
+    
+    QUnit.test( "Load Problem Set, Load problems object ", function( assert ) {
+        var myModel = HYB.ProblemSet;
+        var ProblemSet = myModel.ProblemSet;
+        var psID = 100;
+        var problemSetId = ProblemSet.LoadProblemSet(psID);
+        var rawProblems = ProblemSet.ProblemRawObjects;
+        assert.ok ( rawProblems.length === ProblemSet.ProblemSetQuestionCount, "Load problems object - validate count");
+    });
+
+</script>
+</body>
+</html>

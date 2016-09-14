@@ -1,4 +1,6 @@
 
+// a learner has a lesson plan
+// a lesson plan contains a sequence of lessons
 var mockLearner = 
 {
     "learnerID" : "22",
@@ -8,5 +10,5 @@ var mockLearner =
     "timeOnTask" : "41 minutes",
     "currentLessonId" : 100,
     "nextLessonId" : 101
-       
+   
 }

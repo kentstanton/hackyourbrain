@@ -1,7 +1,8 @@
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ** this is all temporary on the path to react
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-// todo : use mathjax to render mathml and then insert the rendered content
-// convert to use react components
 function AddProblemRow(questionSet) {
     
     var problemSetHtml = "";
@@ -31,6 +32,7 @@ function AddProblemRow(questionSet) {
     
     $(".answer-correct").click( function() { $( this ).css('background-color', 'green'); });
     $(".answer-incorrect").click( function() { $( this ).css('background-color', 'red'); });
+    
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
 
