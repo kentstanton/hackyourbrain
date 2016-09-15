@@ -1,6 +1,6 @@
 
 /*
-    This is the module loader. Eventually I'll want to separate the modules by type. 
+    This is the HYB Models module loader.
 */
 
 // Define HYB as a global
@@ -18,8 +18,6 @@ if (typeof HYB == "undefined") {
         HYB.version = 1.0;
         HYB.moduleName = "HYB";
         HYB.GetReleaseInfo = function () { return "pre-relesae"; }
-        HYB.currentProblemSetId = 0;
-        HYB.nextProblemSetId = 0;
 
     })(window, HYB);
 
@@ -65,18 +63,6 @@ if (typeof HYB == "undefined") {
         HYB.LearningPlan.parentModule = HYBRoot;
         HYB.LearningPlan.version = HYBRoot.version;
     }) (window, HYB);
-
-    // ProblemSet controller
-    /* NOT CURRENTLY USED
-    (HYB.ProblemSetController = function (window, HYBRoot) {
-        HYBRoot.ProblemSetController = HYBRoot.ProblemSetController || {};
-        if (HYBRoot.ProblemSetController.moduleName) { return; }
-
-        HYB.ProblemSetController.moduleName = "ProblemSetController";
-        HYB.ProblemSetController.parentModule = HYBRoot;
-        HYB.ProblemSetController.version = HYBRoot.version;
-    }) (window, HYB);
-    */
 
 }
 

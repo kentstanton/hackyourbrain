@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Question Model Unit Tests</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./dashboard.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./bootstrap-3.3.7-dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+<script src="../../controllers/hybui.js"></script>
+
+<script>
+    QUnit.test( "Canary test", function( assert ) {
+        assert.ok( 1 == "1", "Passed!" );
+    });
+
+
+    QUnit.test( "Get HYBui (parent) object test", function( assert ) {
+        var myHBYui = HYBui;
+        assert.ok ( myHBYui !== undefined, "HYBui is defined" );
+    });
+
+    QUnit.test( "Get a sidemenu controller object ", function( assert ) {
+        var myController = HYBui.SideMenu;
+        var theMenu = myController.SideMenu;
+        assert.ok ( theMenu !== undefined, "SideMenu object is defined" );
+    });
+
+    QUnit.test( "Mock Test of DisableAllMenuItems ", function( assert ) {
+        var myController = HYBui.SideMenu;
+        var theMenu = myController.SideMenu;
+        var isOK = theMenu.DisableAllMenuItems();
+        assert.ok ( isOK !== true, "SideMenu object is defined" );
+    });
+
+</script>
+
+
+<div style="line-height:40px;">
+    <div id="menu-item-dashboard" class="active">mock menu item for test</div>
+    <div id="mock-menu-item-dashboard" class="active">mock menu item for test</div>
+</div>
+
+</body>
+</html>
