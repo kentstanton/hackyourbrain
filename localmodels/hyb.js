@@ -64,6 +64,14 @@ if (typeof HYB == "undefined") {
         HYB.LearningPlan.version = HYBRoot.version;
     }) (window, HYB);
 
+    // SidePanel
+    (HYB.SidePanel = function (window, HYBRoot) {
+        HYBRoot.SidePanel = HYBRoot.SidePanel || {};
+        if (HYBRoot.SidePanel.moduleName) { return; }
+        HYB.SidePanel.moduleName = "SidePanel";
+        HYB.SidePanel.parentModule = HYBRoot;
+        HYB.SidePanel.version = HYBRoot.version;
+    }) (window, HYB);
 }
 
 

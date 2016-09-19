@@ -62,7 +62,9 @@ function SideMenuEventHandler(currentProblemSetID) {
     $("#menu-item-currentproblems").click( function() {
         
         // manage menu and hide dashboard panel
-        DisableAllMenuItems();    
+        var myController = HYBui.SideMenu;
+        var theMenu = myController.SideMenu;
+        var isOK = theMenu.DisableAllMenuItems();
         $("#menu-item-currentproblems").addClass("active");
         $("#dashboard_body").hide();
         
@@ -73,40 +75,14 @@ function SideMenuEventHandler(currentProblemSetID) {
 
     } );
 
-    $("#menu-item-dashboard").click( function() {
-        DisableAllMenuItems();    
-        $("#menu-item-dashboard").addClass("active");
-        $("#dashboard_body").show();        
-        $("#current_problemset_body").hide();
 
-    } );
 
-    $("#menu-item-allproblemsets").click( function() {
-        DisableAllMenuItems();    
-        $("#menu-item-allproblemsets").addClass("active");
-    } );
 
-    $("#menu-item-challenges").click( function() {
-        DisableAllMenuItems();    
-        $("#menu-item-challenges").addClass("active");
-    } );
             
-    $("#menu-item-reports").click( function() {
-        DisableAllMenuItems();    
-        $("#menu-item-reports").addClass("active");
-    } );
 }
 
 
-// menus            
-function DisableAllMenuItems() {
-    $("#menu-item-dashboard").removeClass("active");
-    $("#menu-item-currentproblems").removeClass("active");
-    $("#menu-item-challenges").removeClass("active");
-    $("#menu-item-reports").removeClass("active");
-    $("#menu-item-allproblemsets").removeClass("active");
     
-}
 
 function InitDashboard() {
     $("#link-by-topic").click( function() {

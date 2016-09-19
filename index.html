@@ -58,17 +58,16 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li id="menu-item-dashboard" class="active" style="font-weight:bold"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
-            <li id="menu-item-currentproblems"><a href="#">Current</a></li>
-            <li id="menu-item-allproblemsets"><a href="#">All Problem Sets</a></li>
-            <li id="menu-item-challenges"><a href="#">Challenges</a></li>
-            <li id="menu-item-reports"><a href="#">Reports</a></li>
+            <li id="menu-item-dashboard" class="active" style="font-weight:bold" class="dashboard-menu"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
+            <li id="menu-item-currentproblems"><a href="#" class="dashboard-menu">Current Problem Set</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <li style="font-weight:bold"><a href="">January Challenges</a></li>
+          <ul id="menu" class="nav nav-sidebar">
+            <li style="font-weight:bold"><a href="">Challenges</a></li>
             <li><a href="">Basic Ratios</a></li>
-            <li><a href="">Scientific Noation</a></li>
+            <li><a href="">Scientific Notation</a></li>
             <li><a href="">Advanced Ratios</a></li>
+          </ul>
+          <ul class="nav nav-sidemenu">
             <li id="timer" style="padding-left:20px;"></li>
           </ul>
         </div>
@@ -174,7 +173,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>window.jQuery || document.write('<script src="./bootstrap-3.3.7-dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
@@ -195,15 +196,19 @@
     <script type="text/javascript"  src="./localmodels/problemset.js"></script>
     <script type="text/javascript"  src="./localmodels/question.js"></script>
 
+    <script type="text/javascript"  src="./localmodels/sidepanel.js"></script>
+    <script type="text/javascript"  src="./data/menus.js"></script>
+    
     <!-- Mocks for data until middleware is created -->
     <script type="text/javascript"  src="./data/mocklearner.js"></script>
     <script type="text/javascript"  src="./data/mockproblemsets.js"></script>
 
-    <script type="text/babel"  src="./react_timer.js"></script>
+    <script type="text/babel"  src="./components/react_timer.js"></script>
     
     
      
     <script>
+      
         $(document).ready(function(){
 
             var myModel = HYB.Learner;
@@ -214,7 +219,10 @@
             $("#last-time-on-task").text("Last Session; Time On Task: " + learner.lastTimeOnTask);  
 
             InitDashboard();
-            SideMenuEventHandler(learner.GetCurrentLesson());
+            
+            var UISideMenu = HYB.SidePanel;
+            var sidePanelMenu = UISideMenu.SidePanel;
+            var ret = sidePanelMenu.SidePanelInit(sidePanelMeun);
                          
         });       
     </script>
