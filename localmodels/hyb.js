@@ -72,6 +72,17 @@ if (typeof HYB == "undefined") {
         HYB.SidePanel.parentModule = HYBRoot;
         HYB.SidePanel.version = HYBRoot.version;
     }) (window, HYB);
+
+    // DashBoard Panel
+    
+    (HYB.DashBoardPanel = function (window, HYBRoot) {
+        HYBRoot.DashBoardPanel = HYBRoot.DashBoardPanel || {};
+        if (HYBRoot.DashBoardPanel.moduleName) { return; }
+        HYB.DashBoardPanel.moduleName = "DashBoardPanel";
+        HYB.DashBoardPanel.parentModule = HYBRoot;
+        HYB.DashBoardPanel.version = HYBRoot.version;
+    }) (window, HYB);
+    
 }
 
 

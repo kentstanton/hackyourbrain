@@ -198,6 +198,7 @@
 
     <script type="text/javascript"  src="./localmodels/sidepanel.js"></script>
     <script type="text/javascript"  src="./data/menus.js"></script>
+    <script type="text/javascript"  src="./localmodels/dashboardpanel.js"></script>
     
     <!-- Mocks for data until middleware is created -->
     <script type="text/javascript"  src="./data/mocklearner.js"></script>
@@ -208,9 +209,9 @@
     
      
     <script>
-      
-        $(document).ready(function(){
 
+        $(document).ready(function(){
+            
             var myModel = HYB.Learner;
             var learner = myModel.Learner;
             learner.LearnerInit(mockLearner);
@@ -218,8 +219,10 @@
             $("#last-login-status").text("Last Login: " + learner.lastLoginDate);  
             $("#last-time-on-task").text("Last Session; Time On Task: " + learner.lastTimeOnTask);  
 
-            InitDashboard();
-            
+            var UIDashBoardPanel = HYB.DashBoardPanel;
+            var dashBoard = UIDashBoardPanel.DashBoardPanel;
+            var ret = dashBoard.DashBoardPanelInit();
+
             var UISideMenu = HYB.SidePanel;
             var sidePanelMenu = UISideMenu.SidePanel;
             var ret = sidePanelMenu.SidePanelInit(sidePanelMeun);

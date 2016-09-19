@@ -6,14 +6,14 @@ var sidePanelMeun = {
         {
             "Name": "DashBoard",
             "id" : "menu-item-dashboard",
-            "css-class" : "dashboard-menu",
-            "page-panel" : "page-panel-dashboard"
+            "cssClass" : "dashboard-menu",
+            "pagePanel" : "dashboard-body"
         },
         {
             "Name": "Current Problem Set",
             "id" : "menu-item-currentproblems",
-            "css-class" : "dashboard-menu",
-            "page-panel" : "page-panel-current-problem-set"
+            "cssClass" : "dashboard-menu",
+            "pagePanel" : "current_problemset_body"
         }
     ]
 };

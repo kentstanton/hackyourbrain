@@ -17,6 +17,22 @@
         HYBModule.initSuccess = true;
         HYBModule.RawMeunItems = SidePanelRawObject;
 
+        /*
+        var menuItems = HYBModule.RawMeunItems.meunitems;
+        for (var i=0; i < menuItems.length; i++) {
+            var theItemSelector = "#" + menuItems[i].id;
+            
+            $(theItemSelector).click( function() {
+                HYBModule.DisableAllMenuItems();    
+                $(theItemSelector).addClass("active");
+                var pp = menuItems[i].pagePanel; 
+                $("#"+pp).show();        
+                $("#current_problemset_body").hide();
+            } );
+        }
+        */
+
+        
         $("#menu-item-dashboard").click( function() {
             HYBModule.DisableAllMenuItems();    
             $("#menu-item-dashboard").addClass("active");
@@ -30,7 +46,6 @@
             $("#menu-item-currentproblems").addClass("active");
             $("#current_problemset_body").show();        
             $("#dashboard_body").hide();
-
             UILoadQuestionsPanel(100);
         } );
         
@@ -38,9 +53,13 @@
         return HYBModule.Id;
     }
 
-    HYBModule.DisableAllMenuItems = function(SidePanelRawObject) {
-        $("#menu-item-dashboard").removeClass("active");
-        $("#menu-item-currentproblems").removeClass("active");
+    // Todo : should be possible to disable using the class, but I was having trouble with that approach.
+    HYBModule.DisableAllMenuItems = function() {
+        var menuItems = HYBModule.RawMeunItems.meunitems;
+        for (var i=0; i < menuItems.length; i++) {
+            var theItem = "#" + menuItems[i].id;
+            $(theItem).removeClass("active");
+        }
     }
 
 }) (window, HYB.SidePanel);
