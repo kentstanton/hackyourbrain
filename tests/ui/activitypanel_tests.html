@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Activity Panel Unit Tests</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./dashboard.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="./bootstrap-3.3.7-dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+<script src="../../localmodels/hyb.js"></script>
+<script src="../../localmodels/activitypanel.js"></script>
+<script src="../../localmodels/learner.js"></script>
+<script src="../../data/mocklearner.js"></script>
+
+
+<script>
+    QUnit.test( "Canary test", function( assert ) {
+        assert.ok( 1 == "1", "Passed!" );
+    });
+
+
+    QUnit.test( "Get HYB (parent) object test", function( assert ) {
+        var myHBY = HYB;
+        assert.ok ( myHBY !== undefined, "HYB is defined" );
+    });
+
+    QUnit.test( "Get the activitypanel object ", function( assert ) {
+        var myController = HYB.ActivityPanel;
+        var theMenu = myController.ActivityPanel;
+        assert.ok ( theMenu !== undefined, "activitypanel object is defined" );
+    });
+
+    QUnit.test( "Test of activitypanel init ", function( assert ) {
+        var myController = HYB.ActivityPanel;
+        var thePanel = myController.ActivityPanel;
+        var isOK = thePanel.ActivityPanelInit();
+        assert.ok ( isOK !== true, "ActivityPanelInit is defined" );
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -46,7 +46,7 @@
             $("#menu-item-currentproblems").addClass("active");
             $("#current_problemset_body").show();        
             $("#dashboard_body").hide();
-            UILoadQuestionsPanel(100);
+            //UILoadQuestionsPanel(100);
         } );
         
 

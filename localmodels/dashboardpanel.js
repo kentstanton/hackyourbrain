@@ -14,14 +14,12 @@
     HYBModule.DashBoardPanelInit = function() {
         HYBModule.Id = 1; //DashBoardPanelRawObject.id;
         HYBModule.initSuccess = true;
-        //HYBModule.DashBoardPanelItems = DashBoardPanelRawObject;
 
         $("#link-by-topic").click( function() {
             $("#dashboard-monthly").hide();
             $("#dashboard-topics").show();
             $("#link-by-topic").css("font-weight", "Bold");
             $("#link-by-month").css("font-weight", "Normal");
-
         });
 
         $("#link-by-month").click( function() {
@@ -29,7 +27,6 @@
             $("#dashboard-topics").hide();
             $("#link-by-month").css("font-weight", "Bold");
             $("#link-by-topic").css("font-weight", "Normal");
-        
         });
 
         return HYBModule.Id;        

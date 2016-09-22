@@ -74,13 +74,39 @@ if (typeof HYB == "undefined") {
     }) (window, HYB);
 
     // DashBoard Panel
-    
     (HYB.DashBoardPanel = function (window, HYBRoot) {
         HYBRoot.DashBoardPanel = HYBRoot.DashBoardPanel || {};
         if (HYBRoot.DashBoardPanel.moduleName) { return; }
         HYB.DashBoardPanel.moduleName = "DashBoardPanel";
         HYB.DashBoardPanel.parentModule = HYBRoot;
         HYB.DashBoardPanel.version = HYBRoot.version;
+    }) (window, HYB);
+
+    // Progress Panel
+    (HYB.ProgressPanel = function (window, HYBRoot) {
+        HYBRoot.ProgressPanel = HYBRoot.ProgressPanel || {};
+        if (HYBRoot.ProgressPanel.moduleName) { return; }
+        HYB.ProgressPanel.moduleName = "ProgressPanel";
+        HYB.ProgressPanel.parentModule = HYBRoot;
+        HYB.ProgressPanel.version = HYBRoot.version;
+    }) (window, HYB);
+
+    // Activity Panel
+    (HYB.ActivityPanel = function (window, HYBRoot) {
+        HYBRoot.ActivityPanel = HYBRoot.ActivityPanel || {};
+        if (HYBRoot.ActivityPanel.moduleName) { return; }
+        HYB.ActivityPanel.moduleName = "ActivityPanel";
+        HYB.ActivityPanel.parentModule = HYBRoot;
+        HYB.ActivityPanel.version = HYBRoot.version;
+    }) (window, HYB);
+    
+    // Current Problems Panel
+    (HYB.CurrentProblemsPanel = function (window, HYBRoot) {
+        HYBRoot.CurrentProblemsPanel = HYBRoot.CurrentProblemsPanel || {};
+        if (HYBRoot.CurrentProblemsPanel.moduleName) { return; }
+        HYB.CurrentProblemsPanel.moduleName = "CurrentProblemsPanel";
+        HYB.CurrentProblemsPanel.parentModule = HYBRoot;
+        HYB.CurrentProblemsPanel.version = HYBRoot.version;
     }) (window, HYB);
     
 }
