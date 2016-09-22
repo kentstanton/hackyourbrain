@@ -185,10 +185,6 @@
     
     <!-- don't load async to avoid issues with timing on the initial page load-->
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_CHTML"></script>
-
-    <!-- The skeleton code creates an abstraction around what will eventually be middleware -->
-    <script type="text/javascript"  src="./skeleton.js"></script>
-    <script type="text/javascript"  src="./skeletonproblemsets.js"></script>
     
     <!-- load order dependencies here - need to set up module loading -->
     <script type="text/javascript"  src="./localmodels/hyb.js"></script>
@@ -245,7 +241,7 @@
             // todo - mockproblemsets will not be passed from here once the DB is added
             var problemSetID = 100;
             var ret = currentProblems.CurrentProblemsPanelInit(mockTopic, mockProblemSets, problemSetID);
-            var ret = currentProblems.ProblemsPanelRender();
+            var ret = currentProblems.ProblemsPanelRender(101);
             
             // force mathjax to reinterpret the page
             MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
