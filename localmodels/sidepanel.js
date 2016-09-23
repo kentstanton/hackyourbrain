@@ -5,7 +5,7 @@
     HYBRoot.SidePanel = HYBRoot.SidePanel || {};
     if (HYBRoot.SidePanel.moduleName) { return; }
     var HYBModule = HYBRoot.SidePanel;
-    HYBModule.moduleName = "Side Panel";
+    HYBModule.moduleName = "SidePanel";
     'use strict';
 
     HYBModule.initSuccess = false;
@@ -32,7 +32,6 @@
         }
         */
 
-        
         $("#menu-item-dashboard").click( function() {
             HYBModule.DisableAllMenuItems();    
             $("#menu-item-dashboard").addClass("active");
@@ -46,14 +45,12 @@
             $("#menu-item-currentproblems").addClass("active");
             $("#current_problemset_body").show();        
             $("#dashboard_body").hide();
-            //UILoadQuestionsPanel(100);
         } );
-        
 
         return HYBModule.Id;
     }
 
-    // Todo : should be possible to disable using the class, but I was having trouble with that approach.
+    // Todo : should be possible to disable all menu items using the class, but I am having trouble with that approach.
     HYBModule.DisableAllMenuItems = function() {
         var menuItems = HYBModule.RawMeunItems.meunitems;
         for (var i=0; i < menuItems.length; i++) {

@@ -16,13 +16,6 @@
    
     <!-- Custom styles for this template -->
     <link href="./dashboard.css" rel="stylesheet">
-
-   
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
   <body>
 
@@ -53,126 +46,75 @@
       </div>
     </nav>
 
-    <!-- Left Side Menu Panel -->
+
+    <!-- top level container for the body -->
     <div class="container-fluid">
-      <div class="row">
+
+        <!-- Left Side Menu Panel -->
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
+            <ul class="nav nav-sidebar">
             <li id="menu-item-dashboard" class="active" style="font-weight:bold" class="dashboard-menu"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
             <li id="menu-item-currentproblems"><a href="#" class="dashboard-menu">Current Problem Set</a></li>
-          </ul>
-          <ul id="menu" class="nav nav-sidebar">
+            </ul>
+            <ul id="menu" class="nav nav-sidebar">
             <li style="font-weight:bold"><a href="">Challenges</a></li>
             <li><a href="">Basic Ratios</a></li>
             <li><a href="">Scientific Notation</a></li>
             <li><a href="">Advanced Ratios</a></li>
-          </ul>
-          <ul class="nav nav-sidemenu">
+            </ul>
+            <ul class="nav nav-sidemenu">
             <li id="timer" style="padding-left:20px;"></li>
-          </ul>
+            </ul>
         </div>
 
+        <!-- Body content Panel -->
+        <div id="body-content-panel">
 
-    <!-- Current Problem Set Panel -->
-        <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
-          <h2 class="page-header"><span id="current-problemset-name"></span></h2>
-          <h4 class="page-header" id="problems-panel-rule"></h4>
+            <!-- Current Problem Set Panel -->
+            <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
+                <h2 class="page-header"><span id="current-problemset-name"></span></h2>
+                <h4 class="page-header" id="problems-panel-rule"></h4>
           
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Evaluate:</th>
-                  <th>Answer 1</th>
-                  <th>Answer 2</th>
-                  <th>Answer 3</th>
-                  <th>Answer 4</th>
-                </tr>
-              </thead>
-              <tbody id="problem-set-table">
-                <tr id="container"></tr>                
-              </tbody>
-            </table>
-            <a id="next-problem-set-link" href="">Next Problem Set</a>
-          </div>
-        </div>    
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                    <thead id="problem-set-table-head">
+                    </thead>
+                    <tbody id="problem-set-table-body"></tbody>
+                    </table>
+                    <div id="next-problemset-link" style="color:blue;font-weight:bold;" ></div>
+                </div>
+            </div>    
 
     
-    <!-- Dashboard Panel -->
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
-            <h3 class="page-header"><span id="page-title"> </span></h3>
+            <!-- Dashboard Panel -->
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
+                <h3 class="page-header"><span id="page-title"> </span></h3>
 
-            <table><tr>
-            <td style="padding-right:40px;"><h4 class="page-header"><span id="last-login-status"></span></h4></td>
-            <td><h4 class="page-header"><span id="last-time-on-task"></span></h4></td>
-            <tr></table>
+                <table><tr>
+                <td style="padding-right:40px;"><h4 class="page-header"><span id="last-login-status"></span></h4></td>
+                <td><h4 class="page-header"><span id="last-time-on-task"></span></h4></td>
+                <tr></table>
 
-            <span class="linkbutton" style="font-weight:bold;" id="link-by-month">Your Progress</span>
-            <span class="linkbutton" id="link-by-topic">By Topic</span>
-          
-          <!--
-          <div class="row placeholders" id="dashboard-monthly">
-              <img src="./demographic.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
-          </div>
-          -->            
-          
-          <h3 class="sub-header">Recent Problem Sets: (mock data)</h3>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Topic</th>
-                  <th>Level</th>
-                  <th>Set</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Scientific Notation</td>
-                  <td style="color:green">1</td>
-                  <td style="color:green">4 of 4</td>
-                  <td style="color:Red; font-weight:bold;">Next Up - To Do</td>
-                  <td style="color:#428bca; font-weight:bold;">Start</td>
-                </tr>
-                  
-                <tr>
-                  <td>Scientific Notation</td>
-                  <td style="color:green">1</td>
-                  <td style="color:green">3 of 4</td>
-                  <td style="color:green">Abandoned</td>
-                  <td style="color:green">Retry</td>
-                </tr>
-                <tr>
-                  <td>Scientific Notation</td>
-                  <td style="color:green">1</td>
-                  <td style="color:green">2 of 4</td>
-                  <td style="color:green">Completed</td>
-                  <td style="color:green">Retry</td>
-                </tr>
-                <tr>
-                  <td>Scientific Notation</td>
-                  <td style="color:green">1</td>
-                  <td style="color:green">1 of 4</td>
-                  <td style="color:green">Completed</td>
-                  <td style="color:green">Retry</td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+                <!--
+                <span class="linkbutton" style="font-weight:bold;" id="link-by-month">Your Progress</span>
+                <span class="linkbutton" id="link-by-topic">By Topic</span>
+                -->
+
+                <h3 class="sub-header">Recent Problem Sets: (mock data)</h3>
+                <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead id="learner-recent-activity-table-head"></thead>
+                    <tbody id="learner-recent-activity-table-body"></tbody>
+                </table>
+                </div>
+            </div>
+        </div>          
     </div>
-
 
     <!-- react core javascript -->
     <script src="./react/build/react.js"></script>
     <script src="./react/build/react-dom.js"></script>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
-    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -200,15 +142,17 @@
     <script type="text/javascript"  src="./localmodels/activitypanel.js"></script>
     <script type="text/javascript"  src="./localmodels/progresspanel.js"></script>
     <script type="text/javascript"  src="./localmodels/currentproblemspanel.js"></script>
-    
+    <script type="text/javascript"  src="./localmodels/recentproblemsetspanel.js"></script>
+    <script type="text/javascript"  src="./localmodels/contentpanel.js"></script>
     
     <!-- Mocks for data until middleware is created -->
     <script type="text/javascript"  src="./data/mocklearner.js"></script>
     <script type="text/javascript"  src="./data/mockproblemsets.js"></script>
     <script type="text/javascript"  src="./data/mocktopic.js"></script>
+    <script type="text/javascript"  src="./data/mockrecentproblemsets.js"></script>
     
     <!-- placeholder for react. future use for UI -->
-    <script type="text/babel"  src="./components/react_timer.js"></script>
+    <!--<script type="text/babel"  src="./components/react_timer.js"></script>-->
      
     <script>
 
@@ -217,34 +161,38 @@
       */
 
         $(document).ready(function(){
-
-            var UIActivityPanel = HYB.ActivityPanel;
-            var activity = UIActivityPanel.ActivityPanel;
+            var ret;
             var mockLearnerID = 21;
-            var isOk = activity.ActivityPanelInit(mockLearnerID);
-            activity.ActivityPanelDisplay();              
-
-            var UIDashBoardPanel = HYB.DashBoardPanel;
-            var dashBoard = UIDashBoardPanel.DashBoardPanel;
-            var ret = dashBoard.DashBoardPanelInit();
-
-            var UIProgressPanel = HYB.ProgressPanel;
-            var progressPanel = UIProgressPanel.ProgressPanel;
-            progressPanel.ProgressPanelInit();
+            var mockProblemSetID = 100;
 
             var UISideMenu = HYB.SidePanel;
             var sidePanelMenu = UISideMenu.SidePanel;
-            var ret = sidePanelMenu.SidePanelInit(sidePanelMeun);
+            ret = sidePanelMenu.SidePanelInit(sidePanelMeun);
+
+            var UIActivityPanel = HYB.ActivityPanel;
+            var activity = UIActivityPanel.ActivityPanel;
+            ret = activity.ActivityPanelInit(mockLearnerID);
+            activity.ActivityPanelDisplay();              
+
+            var UILearnerRecentPanel = HYB.RecentProblemSetsPanel;
+            var recentProblems = UILearnerRecentPanel.RecentProblemSetsPanel;
+            ret = recentProblems.RecentProblemSetsPanelInit(mockLearnerID);
+            ret = recentProblems.RecentProblemSetsPanelRender();
 
             var UICurrentProblems = HYB.CurrentProblemsPanel;
             var currentProblems = UICurrentProblems.CurrentProblemsPanel;
-            // todo - mockproblemsets will not be passed from here once the DB is added
-            var problemSetID = 100;
-            var ret = currentProblems.CurrentProblemsPanelInit(mockTopic, mockProblemSets, problemSetID);
-            var ret = currentProblems.ProblemsPanelRender(101);
-            
-            // force mathjax to reinterpret the page
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+            ret = currentProblems.CurrentProblemsPanelInit(mockTopic, mockProblemSets, mockProblemSetID);
+            ret = currentProblems.ProblemsPanelRender(mockProblemSetID);
+
+            // dashbord is currently not rendering content - will display graphic representations of progress
+            //var UIDashBoardPanel = HYB.DashBoardPanel;
+            //var dashBoard = UIDashBoardPanel.DashBoardPanel;
+            //ret = dashBoard.DashBoardPanelInit();
+
+            // may not be needed
+            //var UIProgressPanel = HYB.ProgressPanel;
+            //var progressPanel = UIProgressPanel.ProgressPanel;
+            //progressPanel.ProgressPanelInit();
 
         });       
     </script>

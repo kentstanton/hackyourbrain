@@ -9,19 +9,14 @@
 
     HYBModule.Initalized = false;
     HYBModule.Id = 0;
-    HYBModule.ProblemSetId = 0;    
+    HYBModule.ActiveProblemSetId = 0;
     HYBModule.TopicData = "";
     HYBModule.ProblemSetData = "";
 
-    // todo
-    /*
-        First implementation:
-        The topic and problem sets are passed in mocks
-
-    */
+    //todo: Topic and problem sets are passed in mocks
     HYBModule.CurrentProblemsPanelInit = function(topicData, problemSetData, currentProblemSetID) {
         if (topicData === undefined || problemSetData === undefined) {return false;}
-        HYBModule.ProblemSetId = currentProblemSetID;
+        HYBModule.ActiveProblemSetId = currentProblemSetID;
         HYBModule.TopicId = topicData.id;
         HYBModule.TopicData = topicData;
         HYBModule.ProblemSetData = problemSetData;
@@ -30,28 +25,74 @@
     }
 
     //-todo -- consolidate the topic and problem set
-    HYBModule.ProblemsPanelRender = function(currentProblemSetID) {
-        var questionSet = GetNextProblemSet(currentProblemSetID);
-        $("#problems-panel-rule").text(HYBModule.TopicData.topicRule);
+    HYBModule.ProblemsPanelRender = function() {
+        
+        var questionSet = HYBModule.GetNextProblemSet(HYBModule.ActiveProblemSetId);
+        $("#current-problemset-name").html(HYBModule.ProblemSetTitleHtml());
+        $("#problems-panel-rule").html(HYBModule.TopicData.topicRule);
+        $("#problem-set-table-head").html(HYBModule.CurrentProblemSetTableHeadHtml());
+
         ProblemSetProblemsRender(questionSet);
-        ProblemSetTitleRender();        
+        NextProblemSetLinkRender();
+
+        // force mathjax to reinterpret the page
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+             
     }
 
+    HYBModule.CurrentProblemSetTableHeadHtml  = function() {                         
+        var problemSetTableHeadHtml = "<tr><th>Evaluate:</th><th>Answer 1</th><th>Answer 2</th><th>Answer 3</th><th>Answer 4</th></tr>";
+        return problemSetTableHeadHtml;
+    }
 
-    //-------------------------------------------
-    // private methods
-    //-------------------------------------------
+    HYBModule.ProblemSetTitleHtml = function() {
+        var psModel = HYB.ProblemSet;
+        var ProblemSet = psModel.ProblemSet;
+        var problemSetId = ProblemSet.LoadProblemSet(HYBModule.ActiveProblemSetId);
+        var psTitle = ProblemSet.ProblemSetName + "; Level: " + ProblemSet.ProblemSetLevel + "; Sequence: " + ProblemSet.ProblemSetSequence
+        return psTitle;
+    }
 
-    //-todo -- rethink and rewrite
+    HYBModule.GetNextProblemSet = function() {
+    var psModel = HYB.ProblemSet;
+        var ProblemSet = psModel.ProblemSet;
+        var problemSetId = ProblemSet.LoadProblemSet(HYBModule.ActiveProblemSetId);
+        var rawQuestions = ProblemSet.ProblemRawObjects;
+        return rawQuestions;
+    }
+
+    HYBModule.GetQuestionFromProblemSet = function(rawQuestions, questionId) {
+        var aQuestion = rawQuestions[questionId];
+        var questionModel = HYB.Question;
+        var theQuestion = questionModel.Question;
+        var questionID = theQuestion.QuestionInit(aQuestion);
+        return theQuestion;
+    }
+    
+
+    /*
+    *   Private methods
+    *   Functions that return content to the top level render function are exposed so they can be unit tested
+    *   Function with that add event handlers currently update the DOM directly. This will be refactored in the future. 
+    */
+    NextProblemSetLinkRender = function() {
+        $("#next-problemset-link").text("Next Problem Set");
+        $("#next-problemset-link").click(
+            function () {
+                HYBModule.ActiveProblemSetId++;
+                HYBModule.ProblemsPanelRender();
+            }
+        ); 
+               
+    }
+
+    //-todo -- rethink and refactor; jquery or react?
     ProblemSetProblemsRender = function(questionSet) {
         var problemSetHtml = "";
         for (var questionLoopCounter=0; questionLoopCounter < questionSet.length; questionLoopCounter++) {
-            var theQuestion = GetQuestionFromProblemSet(questionSet, questionLoopCounter);
+            var theQuestion = HYBModule.GetQuestionFromProblemSet(questionSet, questionLoopCounter);
             
-            // start the row
             problemSetHtml = problemSetHtml + '<tr id="question-row-' + questionLoopCounter + '"><td > ` ' + theQuestion.questionRawText + ' ` </td>';
-
-            // display and add click handlers for the answers
             for (var answerLoopCounter=0; answerLoopCounter < theQuestion.answers.length; answerLoopCounter++) {
                 var answerID = 'id="question' + questionLoopCounter + '-answer' + answerLoopCounter;
                 if (theQuestion.correctAnswerIndex === answerLoopCounter) {
@@ -62,46 +103,12 @@
                 problemSetHtml = problemSetHtml + answerID + '"> ` ' + theQuestion.answers[answerLoopCounter] + '  ` </td><';
                 
             }
-            // end the row          
             problemSetHtml = problemSetHtml + '</tr>';
         }
         
-        $("#problem-set-table").html(problemSetHtml);
-        
+        $("#problem-set-table-body").html(problemSetHtml);
         $(".answer-correct").click( function() { $( this ).css('background-color', 'green'); });
         $(".answer-incorrect").click( function() { $( this ).css('background-color', 'red'); });
-        
     }
-
-    //-render
-    function ProblemSetTitleRender() {
-        var psTitle = GetProblemSetTitle(HYBModule.ProblemSetId);
-        $("#current-problemset-name").text(psTitle);    
-    }
-
-    function GetProblemSetTitle(currentProblemSetID) {
-    var psModel = HYB.ProblemSet;
-        var ProblemSet = psModel.ProblemSet;
-        var problemSetId = ProblemSet.LoadProblemSet(currentProblemSetID);
-        var psTitle = ProblemSet.ProblemSetName + "; Level: " + ProblemSet.ProblemSetLevel + "; Sequence: " + ProblemSet.ProblemSetSequence
-        return psTitle;
-    }
-
-    function GetNextProblemSet(currentProblemSetID) {
-    var psModel = HYB.ProblemSet;
-        var ProblemSet = psModel.ProblemSet;
-        var problemSetId = ProblemSet.LoadProblemSet(currentProblemSetID);
-        var rawQuestions = ProblemSet.ProblemRawObjects;
-        return rawQuestions;
-    }
-
-    function GetQuestionFromProblemSet(rawQuestions, questionId) {
-        var aQuestion = rawQuestions[questionId];
-        var questionModel = HYB.Question;
-        var theQuestion = questionModel.Question;
-        var questionID = theQuestion.QuestionInit(aQuestion);
-        return theQuestion;
-    }
-
 
 }) (window, HYB.CurrentProblemsPanel);

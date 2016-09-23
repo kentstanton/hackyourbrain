@@ -108,6 +108,24 @@ if (typeof HYB == "undefined") {
         HYB.CurrentProblemsPanel.parentModule = HYBRoot;
         HYB.CurrentProblemsPanel.version = HYBRoot.version;
     }) (window, HYB);
+
+    // Recent Problem Sets Panel
+    (HYB.RecentProblemSetsPanel = function (window, HYBRoot) {
+        HYBRoot.RecentProblemSetsPanel = HYBRoot.RecentProblemSetsPanel || {};
+        if (HYBRoot.RecentProblemSetsPanel.moduleName) { return; }
+        HYB.RecentProblemSetsPanel.moduleName = "RecentProblemSetsPanel";
+        HYB.RecentProblemSetsPanel.parentModule = HYBRoot;
+        HYB.RecentProblemSetsPanel.version = HYBRoot.version;
+    }) (window, HYB);
+
+    // Content Panel owns the main display area of the page
+    (HYB.ContentPanel = function (window, HYBRoot) {
+        HYBRoot.ContentPanelPanel = HYBRoot.ContentPanel || {};
+        if (HYBRoot.ContentPanel.moduleName) { return; }
+        HYB.ContentPanel.moduleName = "ContentPanel";
+        HYB.ContentPanel.parentModule = HYBRoot;
+        HYB.ContentPanel.version = HYBRoot.version;
+    }) (window, HYB);
     
 }
 

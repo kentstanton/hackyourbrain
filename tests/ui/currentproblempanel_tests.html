@@ -6,14 +6,8 @@
     <title>Current Problems Panel Unit Tests</title>
     <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
 
-    <!-- Bootstrap core CSS -->
-    <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./dashboard.css" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="./bootstrap-3.3.7-dist/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
@@ -25,6 +19,7 @@
 <script src="../../localmodels/learner.js"></script>
 <script src="../../data/mocktopic.js"></script>
 <script src="../../data/mockproblemsets.js"></script>
+<script src="../../localmodels/problemset.js"></script>
 
 <script>
     QUnit.test( "Canary test", function( assert ) {
@@ -48,6 +43,22 @@
         var thePanel = myController.CurrentProblemsPanel;
         var isOK = thePanel.CurrentProblemsPanelInit(mockTopic, mockProblemSets);
         assert.ok ( isOK === true, "CurrentProblemsPanelInit is defined" );
+    });
+
+    QUnit.test( "Test of CurrentProblemSetTableHeadHtml ", function( assert ) {
+        var myController = HYB.CurrentProblemsPanel;
+        var thePanel = myController.CurrentProblemsPanel;
+        var theHtml = thePanel.CurrentProblemSetTableHeadHtml();
+        assert.ok ( theHtml.indexOf("</tr>") > 0, "CurrentProblemsPanelInit returns HTML" );
+    });
+
+    QUnit.test( "Test of ProblemSetTitleHtml - loads the problemset model ", function( assert ) {
+        var myController = HYB.CurrentProblemsPanel;
+        var thePanel = myController.CurrentProblemsPanel;
+        var isOK = thePanel.CurrentProblemsPanelInit(mockTopic, mockProblemSets);
+        var mockProblemSetId = 100;
+        var theHtml = thePanel.ProblemSetTitleHtml(mockProblemSetId);
+        assert.ok ( theHtml.indexOf("Level") > 0, "ProblemSetTitleHtml returns HTML; mock problem set id: " + mockProblemSetId );
     });
 
 </script>

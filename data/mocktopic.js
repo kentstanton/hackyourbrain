@@ -4,6 +4,6 @@ var mockTopic =
 {
     "topicID" : "32",
     "topicName" : "Scientific Notation",
-    "topicRule" : "Move the decimal point to the right; The number of places is equal to the exponent."
+    "topicRule" : "Move the decimal point to the right;  The exponent tells you the number of places ."
    
 }
