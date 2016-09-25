@@ -1,5 +1,14 @@
 
-// todo : 
+/*
+* Sidepanel contains the left menu pane area
+*
+* NOTE
+* Currently the sidepanel is acting like a "pane". It displays only the navigation menu.
+* Next step is to move the nav menu to a pane and have the sidepanel display and mange 
+*   the nav menu pane
+*   the topics menu pane
+*   the learner status pane
+*/
 (function (window, HYBRoot) {
     
     HYBRoot.SidePanel = HYBRoot.SidePanel || {};
@@ -9,54 +18,56 @@
     'use strict';
 
     HYBModule.initSuccess = false;
-    HYBModule.Id = 0;
-    HYBModule.RawMeunItems = "0";
+    HYBModule.Id = 50; // arbitrary
+    HYBModule.RawMenuItems = "";
 
-    HYBModule.SidePanelInit = function(SidePanelRawObject) {
-        HYBModule.Id = SidePanelRawObject.id;
-        HYBModule.initSuccess = true;
-        HYBModule.RawMeunItems = SidePanelRawObject;
-
-        /*
-        var menuItems = HYBModule.RawMeunItems.meunitems;
-        for (var i=0; i < menuItems.length; i++) {
-            var theItemSelector = "#" + menuItems[i].id;
-            
-            $(theItemSelector).click( function() {
-                HYBModule.DisableAllMenuItems();    
-                $(theItemSelector).addClass("active");
-                var pp = menuItems[i].pagePanel; 
-                $("#"+pp).show();        
-                $("#current_problemset_body").hide();
-            } );
+    var navMenuItems = [
+        {
+            "navigationMenuId" : "navigation-dashboard",
+            "navigationMenuName" : "Dashboard",
+            "navigationMenuDescription" : "Show your personal dashboard",
+            "active-page-container" : "dashboard_body" 
+        },
+        {
+            "navigationMenuId" : "navigation-current-problems",
+            "navigationMenuName" : "Current Problem Set",
+            "navigationMenuDescription" : "Show the current pending problem set",
+            "active-page-container" : "current_problemset_body"            
         }
-        */
 
-        $("#menu-item-dashboard").click( function() {
-            HYBModule.DisableAllMenuItems();    
-            $("#menu-item-dashboard").addClass("active");
-            $("#dashboard_body").show();        
-            $("#current_problemset_body").hide();
+    ]    
 
-        } );
+    HYBModule.SidePanelInit = function() {
+        HYBModule.initSuccess = true;
+        HYBModule.TopicMenuItems = navMenuItems;
 
-        $("#menu-item-currentproblems").click( function() {
-            HYBModule.DisableAllMenuItems();    
-            $("#menu-item-currentproblems").addClass("active");
-            $("#current_problemset_body").show();        
-            $("#dashboard_body").hide();
+        // build the menu and add click handlers
+        var navMenulList = '<ul id="menu" class="nav nav-sidebar">';
+        $.each(navMenuItems, 
+            function( index, navMenu) {
+                navMenulList = navMenulList + '<li id="'+navMenu.navigationMenuId+'" class="sidepanel-menu navigation-menu">'+navMenu.navigationMenuName+'</li>'; 	
+            }
+        );
+        navMenulList = navMenulList + "</ul>";
+        $("#navigation-menu-pane").html(navMenulList);
+
+        $(".navigation-menu").click( function() {
+            $(".navigation-menu").removeClass("active");   
+            $("#"+this.id).addClass("active");
+            
+            // todo - this needs to be abstracted
+            if (this.id === "navigation-dashboard") {
+                $("#dashboard_body").show();        
+                $("#current_problemset_body").hide();
+            } else {
+                $("#dashboard_body").hide();        
+                $("#current_problemset_body").show();
+            }
+
         } );
 
         return HYBModule.Id;
     }
 
-    // Todo : should be possible to disable all menu items using the class, but I am having trouble with that approach.
-    HYBModule.DisableAllMenuItems = function() {
-        var menuItems = HYBModule.RawMeunItems.meunitems;
-        for (var i=0; i < menuItems.length; i++) {
-            var theItem = "#" + menuItems[i].id;
-            $(theItem).removeClass("active");
-        }
-    }
 
 }) (window, HYB.SidePanel);

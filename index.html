@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a id="header-home-text"class="navbar-brand" href="#" style="color:yellow">Hack Your Brain</a>
+          <a id="header-home-text"class="navbar-brand" href="#" style="color:silver">Hack Your Brain</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -52,19 +52,19 @@
 
         <!-- Left Side Menu Panel -->
         <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-            <li id="menu-item-dashboard" class="active" style="font-weight:bold" class="dashboard-menu"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
-            <li id="menu-item-currentproblems"><a href="#" class="dashboard-menu">Current Problem Set</a></li>
-            </ul>
-            <ul id="menu" class="nav nav-sidebar">
-            <li style="font-weight:bold"><a href="">Challenges</a></li>
-            <li><a href="">Basic Ratios</a></li>
-            <li><a href="">Scientific Notation</a></li>
-            <li><a href="">Advanced Ratios</a></li>
-            </ul>
-            <ul class="nav nav-sidemenu">
-            <li id="timer" style="padding-left:20px;"></li>
-            </ul>
+
+            <!-- Navigation menu-->
+            <div style="font-weight:bold;">Navigation</div>
+            <div id="navigation-menu-pane"></div>
+
+
+            <!-- Sidepanel topics menu -->            
+            <div style="font-weight:bold;">Your Topics</div>
+            <div id="topics-menu-pane"></div>
+
+            <!-- Sidepanel topics menu -->            
+            <div style="font-weight:bold;">Your History</div>
+
         </div>
 
         <!-- Body content Panel -->
@@ -84,7 +84,6 @@
                     <div id="next-problemset-link" style="color:blue;font-weight:bold;" ></div>
                 </div>
             </div>    
-
     
             <!-- Dashboard Panel -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
@@ -94,11 +93,6 @@
                 <td style="padding-right:40px;"><h4 class="page-header"><span id="last-login-status"></span></h4></td>
                 <td><h4 class="page-header"><span id="last-time-on-task"></span></h4></td>
                 <tr></table>
-
-                <!--
-                <span class="linkbutton" style="font-weight:bold;" id="link-by-month">Your Progress</span>
-                <span class="linkbutton" id="link-by-topic">By Topic</span>
-                -->
 
                 <h3 class="sub-header">Recent Problem Sets: (mock data)</h3>
                 <div class="table-responsive">
@@ -144,11 +138,12 @@
     <script type="text/javascript"  src="./localmodels/currentproblemspanel.js"></script>
     <script type="text/javascript"  src="./localmodels/recentproblemsetspanel.js"></script>
     <script type="text/javascript"  src="./localmodels/contentpanel.js"></script>
+    <script type="text/javascript"  src="./localmodels/topicspane.js"></script>
     
     <!-- Mocks for data until middleware is created -->
     <script type="text/javascript"  src="./data/mocklearner.js"></script>
     <script type="text/javascript"  src="./data/mockproblemsets.js"></script>
-    <script type="text/javascript"  src="./data/mocktopic.js"></script>
+    <script type="text/javascript"  src="./data/mocktopics.js"></script>
     <script type="text/javascript"  src="./data/mockrecentproblemsets.js"></script>
     
     <!-- placeholder for react. future use for UI -->
@@ -158,6 +153,11 @@
 
       /*
         Todo: rethink, refactor
+        Hierarchy:
+            container - the outer element
+            page - the outer container for the content area
+            panel - an element containing one or more panes
+            pane - a UI element with a single purpose; ie; a menu page 
       */
 
         $(document).ready(function(){
@@ -167,7 +167,11 @@
 
             var UISideMenu = HYB.SidePanel;
             var sidePanelMenu = UISideMenu.SidePanel;
-            ret = sidePanelMenu.SidePanelInit(sidePanelMeun);
+            ret = sidePanelMenu.SidePanelInit();
+
+            var UITopicsPane = HYB.TopicsPane;
+            var topicsPaneMenu = UITopicsPane.TopicsPane;
+            ret = topicsPaneMenu.TopicsPaneInit();
 
             var UIActivityPanel = HYB.ActivityPanel;
             var activity = UIActivityPanel.ActivityPanel;
@@ -184,15 +188,7 @@
             ret = currentProblems.CurrentProblemsPanelInit(mockTopic, mockProblemSets, mockProblemSetID);
             ret = currentProblems.ProblemsPanelRender(mockProblemSetID);
 
-            // dashbord is currently not rendering content - will display graphic representations of progress
-            //var UIDashBoardPanel = HYB.DashBoardPanel;
-            //var dashBoard = UIDashBoardPanel.DashBoardPanel;
-            //ret = dashBoard.DashBoardPanelInit();
-
-            // may not be needed
-            //var UIProgressPanel = HYB.ProgressPanel;
-            //var progressPanel = UIProgressPanel.ProgressPanel;
-            //progressPanel.ProgressPanelInit();
+            $("navigation-dashboard").addClass("active");
 
         });       
     </script>

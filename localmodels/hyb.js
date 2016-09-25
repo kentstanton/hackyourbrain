@@ -120,11 +120,20 @@ if (typeof HYB == "undefined") {
 
     // Content Panel owns the main display area of the page
     (HYB.ContentPanel = function (window, HYBRoot) {
-        HYBRoot.ContentPanelPanel = HYBRoot.ContentPanel || {};
+        HYBRoot.ContentPanel = HYBRoot.ContentPanel || {};
         if (HYBRoot.ContentPanel.moduleName) { return; }
         HYB.ContentPanel.moduleName = "ContentPanel";
         HYB.ContentPanel.parentModule = HYBRoot;
         HYB.ContentPanel.version = HYBRoot.version;
+    }) (window, HYB);
+
+    // Topics pane owns the topics menu in the left sidebar
+    (HYB.TopicsPane = function (window, HYBRoot) {
+        HYBRoot.TopicsPane = HYBRoot.TopicsPane || {};
+        if (HYBRoot.TopicsPane.moduleName) { return; }
+        HYB.TopicsPane.moduleName = "TopicsPane";
+        HYB.TopicsPane.parentModule = HYBRoot;
+        HYB.TopicsPane.version = HYBRoot.version;
     }) (window, HYB);
     
 }
