@@ -10,35 +10,40 @@ var mockProblemSets = [
                 "questionId" : 1,
                 "question" : "6.72 xx 10^3",
                 "answers" : ["6720","672.02","672000","672"],
-                "correct" : "6720"
+                "correct" : "6720",
+                "correctIndex" : 0
             },
 
             {
                 "questionId" : 2,
                 "question" : "6.072 xx 10^3",
                 "answers" : ["6720","6072000","72","6072"],
-                "correct" : "6072"
+                "correct" : "6072",
+                "correctIndex" : 3
             },
             
             {
                 "questionId" : 3,
                 "question" : ".600072 xx 10^3",
                 "answers" : [".672","600.072","672",".60072"],
-                "correct" : "600.072"
+                "correct" : "600.072",
+                "correctIndex" : 1
             },
 
             {
                 "questionId" : 4,
                 "question" : "672 xx 10^0",
                 "answers" : [".72","672","72","720"],
-                "correct" : "672"
+                "correct" : "672",
+                "correctIndex" : 1
             },
             
             {
                 "questionId" : 5,
                 "question" : ".00652 xx 10^3",
                 "answers" : ["256",".065","6.52","6.052"],
-                "correct" : "6.52"
+                "correct" : "6.52",
+                "correctIndex" : 2
             }
         ]
     },

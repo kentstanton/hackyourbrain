@@ -128,12 +128,29 @@ if (typeof HYB == "undefined") {
     }) (window, HYB);
 
     // Topics pane owns the topics menu in the left sidebar
-    (HYB.TopicsPane = function (window, HYBRoot) {
+    (HYB.TopicsPanel = function (window, HYBRoot) {
         HYBRoot.TopicsPane = HYBRoot.TopicsPane || {};
-        if (HYBRoot.TopicsPane.moduleName) { return; }
-        HYB.TopicsPane.moduleName = "TopicsPane";
-        HYB.TopicsPane.parentModule = HYBRoot;
-        HYB.TopicsPane.version = HYBRoot.version;
+        if (HYBRoot.TopicsPanel.moduleName) { return; }
+        HYB.TopicsPanel.moduleName = "TopicsPanel";
+        HYB.TopicsPanel.parentModule = HYBRoot;
+        HYB.TopicsPanel.version = HYBRoot.version;
+    }) (window, HYB);
+
+    // 
+    (HYB.HelpPanel = function (window, HYBRoot) {
+        HYBRoot.HelpPane = HYBRoot.HelpPane || {};
+        if (HYBRoot.HelpPanel.moduleName) { return; }
+        HYB.HelpPanel.moduleName = "HelpPanel";
+        HYB.HelpPanel.parentModule = HYBRoot;
+        HYB.HelpPanel.version = HYBRoot.version;
+    }) (window, HYB);
+
+    (HYB.LearnerSession = function (window, HYBRoot) {
+        HYBRoot.LearnerSession = HYBRoot.LearnerSession || {};
+        if (HYBRoot.LearnerSession.moduleName) { return; }
+        HYB.LearnerSession.moduleName = "LearnerSession";
+        HYB.LearnerSession.parentModule = HYBRoot;
+        HYB.LearnerSession.version = HYBRoot.version;
     }) (window, HYB);
     
 }

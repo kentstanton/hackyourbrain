@@ -86,9 +86,9 @@
         var theQuestion = questionModel.Question;
         var questionID = theQuestion.QuestionInit(aQuestion);
         
-        var mockKnownCorrect = 3;
+        var problemSetKnownCorrect = aQuestion.correctIndex;
                                                 
-        assert.ok ( theQuestion.correctAnswerIndex === mockKnownCorrect, "Verify that the correct answer is found");
+        assert.ok ( theQuestion.correctAnswerIndex === problemSetKnownCorrect, "Verify that the correct answer is found");
     });
 
     QUnit.test( "Fifth question, verify correct answer is present (dependency on ProblemSet) ", function( assert ) {

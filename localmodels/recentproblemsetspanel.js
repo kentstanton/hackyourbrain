@@ -13,8 +13,8 @@
     HYBModule.recentSetsRaw = "";
 
     // todo
-    HYBModule.RecentProblemSetsPanelInit = function(learnerID) {
-        HYBModule.LearnerId = learnerID;
+    HYBModule.RecentProblemSetsPanelInit = function() {
+        HYBModule.LearnerId = parseInt(sessionStorage.getItem("mockLearnerID"));;
 
         HYBModule.recentSetsRaw = mockRecentProblems;
         HYBModule.Initalized = true;

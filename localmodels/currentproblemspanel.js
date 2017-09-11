@@ -13,10 +13,10 @@
     HYBModule.TopicData = "";
     HYBModule.ProblemSetData = "";
 
-    //todo: Topic and problem sets are passed in mocks
-    HYBModule.CurrentProblemsPanelInit = function(topicData, problemSetData, currentProblemSetID) {
+    //todo: Topics and problem sets current using mock data
+    HYBModule.CurrentProblemsPanelInit = function(topicData, problemSetData) {
         if (topicData === undefined || problemSetData === undefined) {return false;}
-        HYBModule.ActiveProblemSetId = currentProblemSetID;
+        HYBModule.ActiveProblemSetId = parseInt(sessionStorage.getItem("mockProblemSetID"));;
         HYBModule.TopicId = topicData.id;
         HYBModule.TopicData = topicData;
         HYBModule.ProblemSetData = problemSetData;
@@ -25,7 +25,7 @@
     }
 
     //-todo -- consolidate the topic and problem set
-    HYBModule.ProblemsPanelRender = function() {
+    HYBModule.ProblemsPanelRender = function(isGotoNext) {
         
         var questionSet = HYBModule.GetNextProblemSet(HYBModule.ActiveProblemSetId);
         $("#current-problemset-name").html(HYBModule.ProblemSetTitleHtml());
@@ -35,13 +35,16 @@
         ProblemSetProblemsRender(questionSet);
         NextProblemSetLinkRender();
 
-        // force mathjax to reinterpret the page
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        // force mathjax to reinterpret the page when a new set of problems is loaded - can't call this on the initial load
+        if (isGotoNext) 
+        {
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        }
              
     }
 
     HYBModule.CurrentProblemSetTableHeadHtml  = function() {                         
-        var problemSetTableHeadHtml = "<tr><th>Evaluate:</th><th>Answer 1</th><th>Answer 2</th><th>Answer 3</th><th>Answer 4</th></tr>";
+        var problemSetTableHeadHtml = "<tr><td colspan=4>Evaluate the expression and click the correct answer</td></tr>";
         return problemSetTableHeadHtml;
     }
 
@@ -49,7 +52,7 @@
         var psModel = HYB.ProblemSet;
         var ProblemSet = psModel.ProblemSet;
         var problemSetId = ProblemSet.LoadProblemSet(HYBModule.ActiveProblemSetId);
-        var psTitle = ProblemSet.ProblemSetName + "; Level: " + ProblemSet.ProblemSetLevel + "; Sequence: " + ProblemSet.ProblemSetSequence
+        var psTitle = ProblemSet.ProblemSetName + "; Level: " + ProblemSet.ProblemSetLevel
         return psTitle;
     }
 
@@ -61,11 +64,10 @@
         return rawQuestions;
     }
 
-    HYBModule.GetQuestionFromProblemSet = function(rawQuestions, questionId) {
-        var aQuestion = rawQuestions[questionId];
+    HYBModule.LoadQuestionFromProblemSet = function(rawQuestion) {
         var questionModel = HYB.Question;
         var theQuestion = questionModel.Question;
-        var questionID = theQuestion.QuestionInit(aQuestion);
+        var questionID = theQuestion.QuestionInit(rawQuestion);
         return theQuestion;
     }
     
@@ -80,35 +82,67 @@
         $("#next-problemset-link").click(
             function () {
                 HYBModule.ActiveProblemSetId++;
-                HYBModule.ProblemsPanelRender();
+                var gotoNext = true;
+                HYBModule.ProblemsPanelRender(gotoNext);
             }
         ); 
                
     }
 
-    //-todo -- rethink and refactor; jquery or react?
+    //-----------------------------------------------------
     ProblemSetProblemsRender = function(questionSet) {
         var problemSetHtml = "";
-        for (var questionLoopCounter=0; questionLoopCounter < questionSet.length; questionLoopCounter++) {
-            var theQuestion = HYBModule.GetQuestionFromProblemSet(questionSet, questionLoopCounter);
-            
-            problemSetHtml = problemSetHtml + '<tr id="question-row-' + questionLoopCounter + '"><td > ` ' + theQuestion.questionRawText + ' ` </td>';
-            for (var answerLoopCounter=0; answerLoopCounter < theQuestion.answers.length; answerLoopCounter++) {
-                var answerID = 'id="question' + questionLoopCounter + '-answer' + answerLoopCounter;
-                if (theQuestion.correctAnswerIndex === answerLoopCounter) {
-                    problemSetHtml = problemSetHtml + '<td class= "answer-correct" ';
-                } else {
-                    problemSetHtml = problemSetHtml + '<td class= "answer-incorrect" '; 
-                }
-                problemSetHtml = problemSetHtml + answerID + '"> ` ' + theQuestion.answers[answerLoopCounter] + '  ` </td><';
-                
+        //for (var questionLoopCounter=0; questionLoopCounter < questionSet.length; questionLoopCounter++) {
+        $.each(questionSet, 
+            function (questionLoopIndex, rawQuestion) {
+                var theQuestion = HYBModule.LoadQuestionFromProblemSet(rawQuestion);
+
+                problemSetHtml = problemSetHtml + '<tr id="question-row-' + questionLoopIndex + '"><td > ` ' + theQuestion.questionRawText + ' ` </td>';
+                $.each(theQuestion.answers,
+                    function( answerLoopIndex, theAnswer) {
+                        var answerID = 'id="question' + questionLoopIndex + '-answer' + answerLoopIndex;
+                        problemSetHtml = problemSetHtml + GetAnswerClass(theQuestion.correctAnswerIndex, answerLoopIndex);
+                        problemSetHtml = problemSetHtml + answerID + '"> ` ' + theQuestion.answers[answerLoopIndex] + '  ` </td><';
+                    }
+                );
+                problemSetHtml = problemSetHtml + '</tr>';
             }
-            problemSetHtml = problemSetHtml + '</tr>';
-        }
+        );
         
         $("#problem-set-table-body").html(problemSetHtml);
-        $(".answer-correct").click( function() { $( this ).css('background-color', 'green'); });
-        $(".answer-incorrect").click( function() { $( this ).css('background-color', 'red'); });
+        $(".answer-incorrect").click( function() { $( this ).css('background-color', '#ff3333'); });
+        
+        $(".answer-correct").click( function() { $( this ).css('background-color', '#99ff33'); });
+        
+        $(".answer-correct").hover( 
+            function() { 
+                $( this ).addClass('answerHover-in');
+            }, 
+            function() {
+                $( this ).addClass('answerHover-out');
+            } 
+        );
+        $(".answer-incorrect").hover( 
+            function() { 
+                $( this ).addClass('answerHover-in');
+            }, 
+            function() {
+                $( this ).addClass('answerHover-out');
+            } 
+        );
+ 
     }
+
+    //-----------------------------------------------------------
+    function GetAnswerClass(correctAnswerIndex, answerLoopIndex) {
+        var answerClass = "";
+        if (correctAnswerIndex === answerLoopIndex) {
+            answerClass = '<td class= "answer-correct" ';
+        } else {
+            answerClass = '<td class= "answer-incorrect" '; 
+        }
+        return answerClass;
+    }
+
 
 }) (window, HYB.CurrentProblemsPanel);

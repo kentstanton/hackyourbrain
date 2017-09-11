@@ -1,6 +1,6 @@
 
 /*
-    This is the HYB UI (contorllers) module loader.
+    This is the HYB UI (controllers) module loader.
 */
 
 // Define HYBui as a global

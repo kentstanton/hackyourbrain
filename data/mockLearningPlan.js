@@ -4,7 +4,7 @@
 // A student will have many learning plans. 
 // A learning plan is specific to a student because 
 //  1) learning plans are customized for each student
-//  2) the learning plan stores the completion status for each challenges
+//  2) the learning plan stores the completion status for each challenge
 //
 // Challenge is the abstract rerpsentation of a question set  
 var mockLearningPlan = 

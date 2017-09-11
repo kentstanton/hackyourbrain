@@ -1,6 +1,6 @@
 
 /*
-* Sidepanel contains the left menu pane area
+* Sidepanel models the left menu panel
 *
 * NOTE
 * Currently the sidepanel is acting like a "pane". It displays only the navigation menu.
@@ -37,7 +37,12 @@
 
     ]    
 
+
     HYBModule.SidePanelInit = function() {
+        navMenuInit();
+    }
+
+    navMenuInit = function() {
         HYBModule.initSuccess = true;
         HYBModule.TopicMenuItems = navMenuItems;
 
@@ -46,22 +51,25 @@
         $.each(navMenuItems, 
             function( index, navMenu) {
                 navMenulList = navMenulList + '<li id="'+navMenu.navigationMenuId+'" class="sidepanel-menu navigation-menu">'+navMenu.navigationMenuName+'</li>'; 	
-            }
-        );
+            });
+
         navMenulList = navMenulList + "</ul>";
         $("#navigation-menu-pane").html(navMenulList);
 
         $(".navigation-menu").click( function() {
-            $(".navigation-menu").removeClass("active");   
+            $(".navigation-menu").removeClass("active");
+            $(".topics-menu").removeClass("active");   
             $("#"+this.id).addClass("active");
-            
+
             // todo - this needs to be abstracted
             if (this.id === "navigation-dashboard") {
                 $("#dashboard_body").show();        
                 $("#current_problemset_body").hide();
+                $("#topics_body").hide();
             } else {
                 $("#dashboard_body").hide();        
                 $("#current_problemset_body").show();
+                $("#topics_body").hide();
             }
 
         } );

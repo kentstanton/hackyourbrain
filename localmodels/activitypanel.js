@@ -1,6 +1,6 @@
 
 
-// ActivityPanel : display the learner welcome and status 
+// ActivityPanel : Area for the display of the learner welcome and status messages
 (function (window, HYBRoot) {
     
     HYBRoot.ActivityPanel = HYBRoot.ActivityPanel || {};
@@ -14,11 +14,9 @@
     HYBModule.Learner = null;
 
 
-    HYBModule.ActivityPanelInit = function(learnerID) {
-        HYBModule.Id = learnerID;
-        var learnerModel = HYB.Learner;
-        HYBModule.Learner = learnerModel.Learner;
-        HYBModule.Learner.LearnerInit(mockLearner);
+    HYBModule.ActivityPanelInit = function(learner) {
+        HYBModule.Id = parseInt(sessionStorage.getItem("mockLearnerID"));
+        HYBModule.Learner = learner;
         HYBModule.initSuccess = true;
         return HYBModule.Id;
     }

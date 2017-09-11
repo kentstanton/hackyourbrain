@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a id="header-home-text"class="navbar-brand" href="#" style="color:silver">Hack Your Brain</a>
+          <a id="header-home-text"class="navbar-brand" href="#" style="color:#66ff66">Hack Your Brain</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -57,33 +57,19 @@
             <div style="font-weight:bold;">Navigation</div>
             <div id="navigation-menu-pane"></div>
 
-
-            <!-- Sidepanel topics menu -->            
             <div style="font-weight:bold;">Your Topics</div>
             <div id="topics-menu-pane"></div>
 
-            <!-- Sidepanel topics menu -->            
-            <div style="font-weight:bold;">Your History</div>
+            <div style="font-weight:bold;">Brain Hacks: Learning Math</div>
+            <div id="brianhacks-menu-pane"></div>
+
+            <div style="font-weight:bold;">Simple Instructions</div>
+            <div id="help-menu-pane"></div>
 
         </div>
 
         <!-- Body content Panel -->
         <div id="body-content-panel">
-
-            <!-- Current Problem Set Panel -->
-            <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
-                <h2 class="page-header"><span id="current-problemset-name"></span></h2>
-                <h4 class="page-header" id="problems-panel-rule"></h4>
-          
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                    <thead id="problem-set-table-head">
-                    </thead>
-                    <tbody id="problem-set-table-body"></tbody>
-                    </table>
-                    <div id="next-problemset-link" style="color:blue;font-weight:bold;" ></div>
-                </div>
-            </div>    
     
             <!-- Dashboard Panel -->
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dashboard_body">
@@ -102,6 +88,36 @@
                 </table>
                 </div>
             </div>
+
+            <!-- Current Problem Set Panel -->
+            <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="current_problemset_body">
+                <h2 class="page-header"><span id="current-problemset-name"></span></h2>
+                <h4 class="page-header" id="problems-panel-rule"></h4>
+          
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead id="problem-set-table-head"></thead>
+                        <tbody id="problem-set-table-body"></tbody>
+                    </table>
+                    <div id="next-problemset-link" class="body-link"></div>
+                </div>
+            </div>    
+
+            <!-- Topics Panel -->
+            <div style="display: none;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="topics_body">
+                <h3 class="page-header"><span id="topics-panel-title"> </span></h3>
+
+                <table><tr>
+                <td style="padding-right:40px;"><h4 class="page-header"><span id="topic-title"></span></h4></td>
+                <td><h4 class="page-header"><span id="topic-description"></span></h4></td>
+                <tr></table>
+                <table class="table table-striped">
+                    <thead id="topic-table-head"></thead>
+                    <tbody id="topic-table-body"></tbody>
+                </table>
+                </div>
+            </div>
+            
         </div>          
     </div>
 
@@ -120,7 +136,7 @@
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     
     <!-- don't load async to avoid issues with timing on the initial page load-->
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_CHTML"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=AM_CHTML"></script>
     
     <!-- load order dependencies here - need to set up module loading -->
     <script type="text/javascript"  src="./localmodels/hyb.js"></script>
@@ -128,6 +144,7 @@
     <script type="text/javascript"  src="./localmodels/learningplan.js"></script>
     <script type="text/javascript"  src="./localmodels/problemset.js"></script>
     <script type="text/javascript"  src="./localmodels/question.js"></script>
+    <script type="text/javascript"  src="./localmodels/learnersession.js"></script>
 
     <!-- UI components -->
     <script type="text/javascript"  src="./localmodels/sidepanel.js"></script>
@@ -135,16 +152,19 @@
     <script type="text/javascript"  src="./localmodels/dashboardpanel.js"></script>
     <script type="text/javascript"  src="./localmodels/activitypanel.js"></script>
     <script type="text/javascript"  src="./localmodels/progresspanel.js"></script>
-    <script type="text/javascript"  src="./localmodels/currentproblemspanel.js"></script>
+    <script type="text/javascript"  src="./localmodels/currentproblemspanel.js?v=113"></script>
     <script type="text/javascript"  src="./localmodels/recentproblemsetspanel.js"></script>
     <script type="text/javascript"  src="./localmodels/contentpanel.js"></script>
-    <script type="text/javascript"  src="./localmodels/topicspane.js"></script>
+    <script type="text/javascript"  src="./localmodels/topicspanel.js"></script>
+    <script type="text/javascript"  src="./localmodels/helppanel.js"></script>
     
     <!-- Mocks for data until middleware is created -->
     <script type="text/javascript"  src="./data/mocklearner.js"></script>
     <script type="text/javascript"  src="./data/mockproblemsets.js"></script>
     <script type="text/javascript"  src="./data/mocktopics.js"></script>
     <script type="text/javascript"  src="./data/mockrecentproblemsets.js"></script>
+    <script type="text/javascript"  src="./data/prealgebra_content.js"></script>
+    
     
     <!-- placeholder for react. future use for UI -->
     <!--<script type="text/babel"  src="./components/react_timer.js"></script>-->
@@ -152,7 +172,7 @@
     <script>
 
       /*
-        Todo: rethink, refactor
+        Todo: Refactor
         Hierarchy:
             container - the outer element
             page - the outer container for the content area
@@ -161,32 +181,46 @@
       */
 
         $(document).ready(function(){
+
+            var mockLearnerID =  24;
+            if (typeof(Storage) !== "undefined") {
+                sessionStorage.setItem("mockLearnerID", mockLearnerID);
+                sessionStorage.setItem("mockProblemSetID", "100");
+            } else {
+                alert("Session storage NOT avaialble");
+            }            
             var ret;
-            var mockLearnerID = 21;
-            var mockProblemSetID = 100;
+
+            var learner = HYB.Learner;
+            var theLearner = learner.Learner;
+            ret = theLearner.LearnerInit(mockLearnerID);
 
             var UISideMenu = HYB.SidePanel;
             var sidePanelMenu = UISideMenu.SidePanel;
             ret = sidePanelMenu.SidePanelInit();
 
-            var UITopicsPane = HYB.TopicsPane;
-            var topicsPaneMenu = UITopicsPane.TopicsPane;
-            ret = topicsPaneMenu.TopicsPaneInit();
+            var UITopicsPanel = HYB.TopicsPanel;
+            var topicsPanelMenu = UITopicsPanel.TopicsPanel;
+            ret = topicsPanelMenu.TopicsPanelInit();
+
+            var UIHelpPanel = HYB.HelpPanel;
+            var helpPanelMenu = UIHelpPanel.HelpPanel;
+            ret = helpPanelMenu.HelpPanelInit();
 
             var UIActivityPanel = HYB.ActivityPanel;
             var activity = UIActivityPanel.ActivityPanel;
-            ret = activity.ActivityPanelInit(mockLearnerID);
+            ret = activity.ActivityPanelInit(theLearner);
             activity.ActivityPanelDisplay();              
 
             var UILearnerRecentPanel = HYB.RecentProblemSetsPanel;
             var recentProblems = UILearnerRecentPanel.RecentProblemSetsPanel;
-            ret = recentProblems.RecentProblemSetsPanelInit(mockLearnerID);
+            ret = recentProblems.RecentProblemSetsPanelInit();
             ret = recentProblems.RecentProblemSetsPanelRender();
 
             var UICurrentProblems = HYB.CurrentProblemsPanel;
             var currentProblems = UICurrentProblems.CurrentProblemsPanel;
-            ret = currentProblems.CurrentProblemsPanelInit(mockTopic, mockProblemSets, mockProblemSetID);
-            ret = currentProblems.ProblemsPanelRender(mockProblemSetID);
+            ret = currentProblems.CurrentProblemsPanelInit(mockTopic, mockProblemSets);
+            ret = currentProblems.ProblemsPanelRender(false);
 
             $("navigation-dashboard").addClass("active");
 

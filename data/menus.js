@@ -1,5 +1,6 @@
 
-var sidePanelMeun = {
+// not currently used
+var sidePanelMenu = {
     "name" : "SidePanelDashboardMenu",
     "id" : "side-panel-dashboard-menu",
     "meunitems" : [
